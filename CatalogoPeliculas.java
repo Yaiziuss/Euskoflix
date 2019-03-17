@@ -36,7 +36,7 @@ public class CatalogoPeliculas{
     public ArrayList<String> getParejitasFelices(){
     	ArrayList<String> listaP= new ArrayList<>();
     	for(int clave: getListaPeliculas()) { 
-    		listaP.add(clave+" "+this.listaPeliculas.get(clave).getNombre());}
+            listaP.add(clave+" "+this.listaPeliculas.get(clave).getNombre());}
     	return (listaP==null)?null:listaP;
     	
     }
