@@ -21,7 +21,7 @@ public class CatalogoPeliculas{
     private Map<Integer,Pelicula> listaPeliculas;
     private static CatalogoPeliculas miCPeli = new CatalogoPeliculas();
     
-    public CatalogoPeliculas(){  this.listaPeliculas=new HashMap<>(); }
+    private CatalogoPeliculas(){  this.listaPeliculas=new HashMap<>(); }
     
     /**
      * 
@@ -61,5 +61,6 @@ public class CatalogoPeliculas{
     public int getTotalPelis(){ return this.listaPeliculas.size();}
     
     private Iterator<Entry<Integer,Pelicula>> getIterador(){return listaPeliculas.entrySet().iterator();}
+    
 
 }
