@@ -29,9 +29,10 @@ class PruebaCatalogoPeliculas {
 		/*p2= new Pelicula("Your Name");
 		p3= new Pelicula("La Bella y la Bestia 2017");*/
 	}
+	
 	@AfterEach
 	void tearDown() throws Exception {
-		ct1= null;
+		ct1.getListaPeliculas().clear();
 		/*p1= null;
 		p2= null;
 		p3= null;*/
@@ -43,6 +44,7 @@ class PruebaCatalogoPeliculas {
 	@Test
 	public void PruebaGetPelis() {
             assertNull(ct1.getPelicula(55));
+            ct1.annadirPelicula(1,"Capitana Marvel");
             assertEquals(ct1.getPelicula(1).getNombre(),"Capitana Marvel");
 	}
 	/**
@@ -73,10 +75,15 @@ class PruebaCatalogoPeliculas {
 	 */
 	@Test
 	public void PruebaTotalPelis() {
-            assertEquals(1, ct1.getTotalPelis() );
-            ct1.annadirPelicula(2,"Capitan America");
-            assertEquals(ct1.getTotalPelis(),2);
+            assertEquals(0, ct1.getTotalPelis() );
+            ct1.annadirPelicula(1,"Capitan America");
+            assertEquals(ct1.getTotalPelis(),1);
 	}
 
-	//TODO Falta getPelicula y annadirEtiqueta
+	@Test
+	public void PruebaAnnadirEtiquetas() {
+		//assertNull(ct1.getListaPeliculas().getClass().)
+		ct1.annadirEtiqueta(1, 7, "Marvel");
+		
+	}
 }
