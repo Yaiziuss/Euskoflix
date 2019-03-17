@@ -29,7 +29,7 @@ public class Pelicula{
     
     public void annadirEtiqueta(String pEtiqueta, float pNApariciones){this.pesoEtiquetas.put(pEtiqueta,pNApariciones);}
     
-    public float getPesoEtiqueta(String pEtiqueta){ return this.pesoEtiquetas.get(pEtiqueta);}
+    public float getPesoEtiqueta(String pEtiqueta){ return (this.pesoEtiquetas.get(pEtiqueta)==null)?0:pesoEtiquetas.get(pEtiqueta);}
 
     public Set<String> getNombresEtiquetas() { return pesoEtiquetas.keySet(); }
     
