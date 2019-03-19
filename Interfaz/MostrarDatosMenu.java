@@ -1,5 +1,5 @@
-package packInterfazEuskoFlix;
-import packEuskoFlix.*;
+package Interfaces;
+import Euskoflix.*;
 
 import java.awt.EventQueue;
 
@@ -16,6 +16,8 @@ import java.awt.Toolkit;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
+
+
 import javax.swing.JComboBox;
 import java.awt.Font;
 import java.awt.Color;
@@ -73,10 +75,16 @@ public class MostrarDatosMenu extends javax.swing.JFrame {
 				//obtenemos la opción del combobox
 				int index = cboxVer.getSelectedIndex();
 				//
-				if(index == 0){JOptionPane.showMessageDialog(null,"Selecciona otra opción, por favor");}
-				else if(index == 1){ 
+				if(index== 0){JOptionPane.showMessageDialog(null,"Selecciona otra opción, por favor");
+			} else if(index == 1){ 
 					MostrarPeliculas ventana = new MostrarPeliculas();
 					ventana.setVisible(true);
+				} else if (index == 2) {
+					MostrarUsuarios vu= new MostrarUsuarios();
+					vu.setVisible(true);
+				} else if (index == 3) {
+					MostrarEtiquetas ve= new MostrarEtiquetas();
+					ve.setVisible(true);
 				}
 			}
 		});

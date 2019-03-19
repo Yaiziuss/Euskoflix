@@ -1,4 +1,4 @@
-package packInterfazEuskoFlix;
+package Interfaces;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
@@ -10,8 +10,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
 
-import packEuskoFlix.CatalogoEtiquetas;
-import packEuskoFlix.CatalogoUsuarios;
+import Euskoflix.*;
 
 public class MostrarEtiquetas extends JDialog {
 
