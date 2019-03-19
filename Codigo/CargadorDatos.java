@@ -16,16 +16,17 @@ import java.util.ArrayList;
  * @author Elalfred
  */
 public class CargadorDatos {
-    private static final String RUTA_F_ETIQUETAS="src\\Datos\\movie-tags.csv";
-    private static final String RUTA_F_PELICULAS="src\\Datos\\movie-titles.csv";
-    private static final String RUTA_F_VALORACIONES="src\\Datos\\movie-ratings.csv";
+
+    private static final String RUTA_F_ETIQUETAS="/home/yaiza/eclipse-workspace/Euskoflix/src/Datos/movie-tags.csv";
+    private static final String RUTA_F_PELICULAS="/home/yaiza/eclipse-workspace/Euskoflix/src/Datos/movie-titles.csv";
+    private static final String RUTA_F_VALORACIONES="/home/yaiza/eclipse-workspace/Euskoflix/src/Datos/movie-ratings.csv";
     private static final String SEPARADOR1=";";
     private static final String SEPARADOR2=",";
     
     
     public static void cargarDatos(){
         cargarFicheroPeliculas();
-        cargarFicheroEtiquetas();
+       // cargarFicheroEtiquetas();
         cargarFicheroValoraciones();
     }
     

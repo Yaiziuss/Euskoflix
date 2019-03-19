@@ -27,7 +27,13 @@ public class Pelicula{
 
     public String getNombre() {return nombre;}
     
-    public void annadirEtiqueta(String pEtiqueta, float pNApariciones){this.pesoEtiquetas.put(pEtiqueta,pNApariciones);}
+    public void annadirEtiqueta(String pEtiqueta, float pNApariciones){
+        if(!this.pesoEtiquetas.containsKey(pEtiqueta)){ 
+            this.pesoEtiquetas.put(pEtiqueta,pNApariciones);
+        }else{
+            this.pesoEtiquetas.put(pEtiqueta,this.pesoEtiquetas.get(pEtiqueta)+ pNApariciones);
+        }
+    }
     
     public float getPesoEtiqueta(String pEtiqueta){ return (this.pesoEtiquetas.get(pEtiqueta)==null)?0:pesoEtiquetas.get(pEtiqueta);}
 
