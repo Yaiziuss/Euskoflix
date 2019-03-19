@@ -42,6 +42,8 @@ public class MostrarDatosMenu extends javax.swing.JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
+					CargadorDatos cd= new CargadorDatos();
+					cd.cargarDatos();
 					MostrarDatosMenu window = new MostrarDatosMenu();
 					window.frmCargaDeDatos.setVisible(true);
 				} catch (Exception e) {

@@ -51,7 +51,7 @@ public class MostrarPeliculas extends JDialog {
 				JButton btnVolver = new JButton("Volver");
 				btnVolver.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						setVisible(true);
+						setVisible(false);
 					}
 				});
 				panel.add(btnVolver);
@@ -71,18 +71,8 @@ public class MostrarPeliculas extends JDialog {
 			                JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 			scrollPane.setPreferredSize(new Dimension(1000, 1000));
 			textArea.setEditable(false);
-			//scrollPane.
 			contentPanel.add(scrollPane);
 			contentPanel.setVisible(true);
-			CargadorDatos cd= new CargadorDatos();
-			cd.cargarDatos();
-			/*Set<Integer> listaPelis =CatalogoPeliculas.getMiCPeli().getListaPeliculas();					
-			for(Integer a : listaPelis){
-				  
-				}
-			}	*/
-			
-			
 			ArrayList<String> lp=CatalogoPeliculas.getMiCPeli().getParejitasFelices();
 			for (int i=0; i<lp.size();i++) {
 				String a= lp.get(i);

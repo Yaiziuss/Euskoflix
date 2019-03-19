@@ -1,12 +1,16 @@
 package Interfaces;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
 
@@ -40,6 +44,11 @@ public class MostrarEtiquetas extends JDialog {
 			getContentPane().add(panel, BorderLayout.SOUTH);
 			{
 				JButton btnVolver = new JButton("Volver");
+				btnVolver.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						setVisible(false);
+					}
+				});
 				panel.add(btnVolver);
 			}
 		}
@@ -51,11 +60,20 @@ public class MostrarEtiquetas extends JDialog {
 			contentPanel.add(tituloEtiCarg);
 		}
 		{
-			JTextArea textArea = new JTextArea();
+			JTextArea textArea = new JTextArea(10000,1);
+			JScrollPane scrollPane = new JScrollPane(textArea);
+			scrollPane.setVerticalScrollBarPolicy(
+			                JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+			scrollPane.setPreferredSize(new Dimension(1000, 1000));
 			textArea.setEditable(false);
-			contentPanel.add(textArea);
-			CatalogoEtiquetas listaEti = CatalogoEtiquetas.getMiCEti();			
+			contentPanel.add(scrollPane);
+			contentPanel.setVisible(true);
+			CatalogoEtiquetas listaEti = CatalogoEtiquetas.getMiCEti();
 			//cargar etiquetas para mostrarlas en el textArea
+			/*for (int i=0; i<listaEti.size();i++) {
+				String a= listaEti.get(i);
+				textArea.insert(a+"\n",i);
+		}*/
 			}
 	}
 
