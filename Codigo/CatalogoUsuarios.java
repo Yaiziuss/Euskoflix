@@ -1,6 +1,7 @@
 package Euskoflix;
 
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry; 
@@ -24,6 +25,14 @@ public class CatalogoUsuarios{
     }
     
     public static CatalogoUsuarios getMiCU(){  return miCU;  }
+    
+  /*  public ArrayList<String> getParejitasFelices(){
+    	ArrayList<String> listaP= new ArrayList<>();
+    	for(int clave: getListaPeliculas()) { 
+            listaP.add(clave+" "+this.listaPeliculas.get(clave).getNombre());}
+    	return (listaP==null)?null:listaP;
+    	
+    }*/
     
     /**
      * Añade la valoracion de pIdPeli a la lista de valoraciones de pIdUsuario y añade pIdUsuario si no existe

@@ -26,7 +26,7 @@ public class CargadorDatos {
     
     public static void cargarDatos(){
         cargarFicheroPeliculas();
-       // cargarFicheroEtiquetas();
+        cargarFicheroEtiquetas();
         cargarFicheroValoraciones();
     }
     
