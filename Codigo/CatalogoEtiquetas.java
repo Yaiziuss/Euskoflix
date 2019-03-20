@@ -1,8 +1,10 @@
-package Euskoflix;
+package packEuskoFlix;
 
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 import java.util.Map.Entry; 
 import java.util.Iterator;
 
@@ -31,6 +33,14 @@ public class CatalogoEtiquetas {
     public void annadirPeliAEtiqueta(String pNombre){
         if(!this.listaApariciones.containsKey(pNombre)) this.listaApariciones.put(pNombre,1);
         else this.listaApariciones.put(pNombre, getApariciones(pNombre)+1);
+    }
+    private Set<String> getListaEtiquetas() {return listaApariciones.keySet(); }
+    public ArrayList<String> getParejitasFelices(){
+    	ArrayList<String> listaE= new ArrayList<>();
+    	for(String clave: getListaEtiquetas()) { 
+            listaE.add(this.listaApariciones.get(clave)+" "+clave);}
+    	return (listaE==null)?null:listaE;
+    	
     }
     
     public int getApariciones(String pEtiqueta){ return (listaApariciones.get(pEtiqueta)==null)?0:listaApariciones.get(pEtiqueta);}
