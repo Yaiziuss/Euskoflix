@@ -4,6 +4,7 @@ package Euskoflix;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 import java.util.Map.Entry; 
 import java.util.Iterator;
 /*
@@ -47,4 +48,23 @@ public class CatalogoUsuarios{
         this.listaUsuarios.get(pIdUsuario).annadirValoracion(pIdPeli, pValoracion);
     }
     private Iterator<Entry<Integer,Usuario>> getIterador(){return listaUsuarios.entrySet().iterator();}
+    
+    private Set<Integer>getListaUsuarios() {return listaUsuarios.keySet(); }
+    
+    /*private Integer getUsu(Integer pClave) {
+    	return listaUsuarios.get(pClave);
+    			//listaUsuarios.get(pClave);
+    }*/
+    
+    public ArrayList<ArrayList<String>> listaValoracionesUsuarios(){
+        ArrayList<ArrayList<String>> listaUV= new ArrayList<>();
+        for(int clave : listaUsuarios.keySet()){
+            ArrayList<String> listaV= new ArrayList<>();
+            for(String key: listaUsuarios.get(clave).getClaves()){
+                listaV.add(key +" "+listaUsuarios.get(clave).getValoracion(Integer.parseInt(key)));
+            }
+            listaUV.add(listaV);
+        }
+        return listaUV;
+    }
 }

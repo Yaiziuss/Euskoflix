@@ -1,6 +1,7 @@
 package Euskoflix;
 
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -29,4 +30,16 @@ public class Usuario{
     public void annadirValoracion(int pIdPeli, float pValoracion){
         this.listaValoraciones.put(pIdPeli,pValoracion);
     }
+
+    public float getValoracion(int pClave){
+        return this.listaValoraciones.get(pClave);
+    }
+    
+    public ArrayList<String> getClaves(){
+        ArrayList<String> listaC = new ArrayList<>();
+        for(int c: listaValoraciones.keySet()){
+            listaC.add(String.valueOf(c));
+        }return listaC;
+    }
+ 
 }

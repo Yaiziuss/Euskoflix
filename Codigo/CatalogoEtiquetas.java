@@ -1,11 +1,11 @@
-package packEuskoFlix;
+package Euskoflix;
 
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
-import java.util.Map.Entry; 
 import java.util.Iterator;
 
 /*
@@ -30,6 +30,7 @@ public class CatalogoEtiquetas {
      * Añade una peli a la etiqueta
      * @param pNombre
      */
+    
     public void annadirPeliAEtiqueta(String pNombre){
         if(!this.listaApariciones.containsKey(pNombre)) this.listaApariciones.put(pNombre,1);
         else this.listaApariciones.put(pNombre, getApariciones(pNombre)+1);
