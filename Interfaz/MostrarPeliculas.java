@@ -1,4 +1,4 @@
-package Interfaces;
+package packInterfazEuskoFlix;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -11,6 +11,7 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.text.html.HTMLDocument.Iterator;
 
 import java.awt.event.ActionListener;
@@ -20,10 +21,13 @@ import java.awt.event.ActionEvent;
 import javax.swing.JList;
 import javax.swing.JLabel;
 import javax.swing.JTextArea;
-import Euskoflix.*;
+import packEuskoFlix.*;
+import javax.swing.JTable;
+import javax.swing.SwingConstants;
 public class MostrarPeliculas extends JDialog {
 
 	private JPanel contentPanel = new JPanel();
+	private JTable table;
 
 	/**
 	 * Launch the application.
@@ -46,6 +50,15 @@ public class MostrarPeliculas extends JDialog {
 		getContentPane().setLayout(new BorderLayout());
 		{
 			JPanel panel = new JPanel();
+			getContentPane().add(panel, BorderLayout.NORTH);
+			{
+				JLabel tituloPeliCarg = new JLabel("Películas cargadas");
+				panel.add(tituloPeliCarg);
+				tituloPeliCarg.setHorizontalAlignment(SwingConstants.CENTER);
+			}
+		}
+		{
+			JPanel panel = new JPanel();
 			getContentPane().add(panel, BorderLayout.SOUTH);
 			{
 				JButton btnVolver = new JButton("Volver");
@@ -61,23 +74,52 @@ public class MostrarPeliculas extends JDialog {
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		{
-			JLabel tituloPeliCarg = new JLabel("Películas cargadas");
-			contentPanel.add(tituloPeliCarg);
+			JScrollPane scrollPane = new JScrollPane();
+			contentPanel.add(scrollPane);
+			{
+				DefaultTableModel modelo = new DefaultTableModel(); 
+				JTable table = new JTable(modelo);
+				scrollPane.setViewportView(table);
+				ArrayList<String> lp=CatalogoPeliculas.getMiCPeli().getParejitasFelices();
+				
+				DefaultTableModel modelotabla;
+				JTable tabla1;
+				JScrollPane scroll1;
+				Object columnas[] = {"ID","Película"};
+
+				    modelotabla = new DefaultTableModel(columnas,0); //0 son las filas
+
+				    tabla1=new JTable(modelotabla);
+				    add(tabla1);
+				    String[] id;
+				    //for para separar el id del nombre de la peli
+				    for(int i=0;i<lp.size();i++){
+				    	id = lp.get(i).split(" ");
+				    	String nombre="";
+				    	//for que junta el nombre de las pelis, ya uqe con el split separa en trozos, con todos los espacios
+				    	for(int j=1;j<id.length;j++){
+				    		nombre+=" "+id[j];
+				    	}
+				    	//para quitar la comilla final
+				    	nombre = nombre.substring(0,nombre.length()-1);
+				        modelotabla.addRow(new Object[] {id[0],nombre});
+				        }
+				    JScrollPane scroll11 = new JScrollPane(tabla1);
+			          add(scroll11);
+				    }
+				    //CONTADORLISTA es para agregar n Filas, y esa n lo define un contador que va sumando 1, cada vez que 
+				    //se agrega una nueva persona (o sea, cada vez que se presiona el jbutton)
+
+				    
+			}
 		}
 		{
-			JTextArea textArea = new JTextArea(150,1);
-			JScrollPane scrollPane = new JScrollPane(textArea);
-			scrollPane.setVerticalScrollBarPolicy(
-			                JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-			scrollPane.setPreferredSize(new Dimension(1000, 1000));
-			textArea.setEditable(false);
-			contentPanel.add(scrollPane);
 			contentPanel.setVisible(true);
-			ArrayList<String> lp=CatalogoPeliculas.getMiCPeli().getParejitasFelices();
-			for (int i=0; i<lp.size();i++) {
+			
+			/*for (int i=0; i<lp.size();i++) {
 				String a= lp.get(i);
 				textArea.insert(a+"\n",i);
-		}
+		}*/
 		}
 	}
-	}
+

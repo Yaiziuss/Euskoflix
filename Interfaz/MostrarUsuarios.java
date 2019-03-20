@@ -1,7 +1,6 @@
-package Interfaces;
+package packInterfazEuskoFlix;
 
 import java.awt.BorderLayout;
-import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,16 +10,18 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
 
-import Euskoflix.*;
+import packEuskoFlix.*;
 import javax.swing.SwingConstants;
+import javax.swing.JTable;
+import javax.swing.JScrollPane;
 
 public class MostrarUsuarios extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
+	private JTable table;
 
 	/**
 	 * Launch the application.
@@ -61,25 +62,18 @@ public class MostrarUsuarios extends JDialog {
 			JLabel tituloUsuCarg = new JLabel("Usuarios cargados");
 			contentPanel.add(tituloUsuCarg);
 		}
-		{	
-			JTextArea textArea = new JTextArea(5000,1);
-			JScrollPane scrollPane = new JScrollPane(textArea);
-			scrollPane.setVerticalScrollBarPolicy(
-			                JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-			scrollPane.setPreferredSize(new Dimension(1000, 1000));
-			textArea.setEditable(false);
+		{
+			JScrollPane scrollPane = new JScrollPane();
 			contentPanel.add(scrollPane);
-			contentPanel.setVisible(true);
-			CatalogoUsuarios listaUsu = CatalogoUsuarios.getMiCU();	
+			{
+				table = new JTable();
+				scrollPane.setViewportView(table);
+			}
+		}
+		{
+			CatalogoUsuarios listaUsu = CatalogoUsuarios.getMiCU();			
 			//cargar usuarios para mostrarlos en el textArea
-			/*for (int i=0; i<listaUsu.size();i++) {
-				String a= listaUsu.get(i);
-				textArea.insert(a+"\n",i);
-		}*/
-			
-			
-//			}
-		}		
+			}		
 		}
 
 }
