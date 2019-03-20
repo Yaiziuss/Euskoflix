@@ -14,17 +14,16 @@ import org.junit.jupiter.api.Test;
  * @author yaiza
  *
  */
-class PruebaCatalogoUsuarios {
-	private static CatalogoUsuarios cu;
-	private Usuario u1;
+class PruebaCargadorDatos {
+	private static CargadorDatos cd;
+	private static CatalogoPeliculas cp;
 
 	/**
 	 * @throws java.lang.Exception
 	 */
 	@BeforeEach
 	void setUp() throws Exception {
-		cu= CatalogoUsuarios.getMiCU();
-		u1= new Usuario();
+		cp= CatalogoPeliculas.getMiCPeli();
 	}
 
 	/**
@@ -32,15 +31,15 @@ class PruebaCatalogoUsuarios {
 	 */
 	@AfterEach
 	void tearDown() throws Exception {
-		cu=null;
+		cd=null;
+		cp.getListaPeliculas().clear();
 	}
 
 	@Test
-	public void PruebaannadirValoracionAUsuario() {
-		assertNotNull(cu.getMiCU());
-		cu.annadirValoracionAUsuario(1, 1, 4);
-		assertEquals(cu.getMiCU().hashCode(),1);
-		
+	public static void PruebaCargarDatos() {
+		assertNull(CatalogoPeliculas.getMiCPeli());
+		CargadorDatos.cargarDatos();
+		assertNotNull(CatalogoPeliculas.getMiCPeli().getListaPeliculas());
 	}
 
 }

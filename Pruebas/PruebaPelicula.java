@@ -66,5 +66,6 @@ class PruebaPelicula {
 		p1.annadirEtiqueta("Superheroina", 20);
 		assertTrue(!p1.getNombresEtiquetas().isEmpty());
 		assertEquals(p1.getNombresEtiquetas().toString(),"[Superheroina, Marvel]");
+		assertNotEquals(p1.getNombresEtiquetas().toString(),"[Superheroe, Magia]");
 	}
 }

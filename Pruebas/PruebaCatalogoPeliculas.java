@@ -56,19 +56,7 @@ class PruebaCatalogoPeliculas {
 		assertNotNull(ct1);
 		assertSame(ct1.getTotalPelis(), 1);
 	}
-
-	
-	
-	/**
-	 * Vamos a probar si añade correctamente los pares
-	 */
-        
-	@Test
-	public void PruebaPares() {
-            assertEquals(ct1.getTotalPelis(),0);
-            ct1.annadirPelicula(1,"Capitana Marvel");
-            assertEquals(ct1.getParejitasFelices().get(0),"1 Capitana Marvel");
-	}
+       
 	
 	/**
 	 * Vamos a probar si añade el número total de peliculas es correcto
