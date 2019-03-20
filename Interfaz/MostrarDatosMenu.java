@@ -42,8 +42,7 @@ public class MostrarDatosMenu extends javax.swing.JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					CargadorDatos cd= new CargadorDatos();
-					cd.cargarDatos();
+					CargadorDatos.cargarDatos();
 					MostrarDatosMenu window = new MostrarDatosMenu();
 					window.frmCargaDeDatos.setVisible(true);
 				} catch (Exception e) {
@@ -81,10 +80,10 @@ public class MostrarDatosMenu extends javax.swing.JFrame {
 			} else if(index == 1){ 
 					MostrarPeliculas ventana = new MostrarPeliculas();
 					ventana.setVisible(true);
-				} else if (index == 2) {
+				} else if (index == 3) {
 					MostrarUsuarios vu= new MostrarUsuarios();
 					vu.setVisible(true);
-				} else if (index == 3) {
+				} else if (index == 2) {
 					MostrarEtiquetas ve= new MostrarEtiquetas();
 					ve.setVisible(true);
 				}

@@ -68,6 +68,9 @@ public class MostrarEtiquetas extends JDialog {
 			{
 				DefaultTableModel modelo = new DefaultTableModel(); 
 				JTable table = new JTable(modelo);
+				table.setRowSelectionAllowed(false);
+				table.setColumnSelectionAllowed(false);
+				table.setCellSelectionEnabled(false);
 				scrollPane.setViewportView(table);
 				
 				DefaultTableModel modelotabla;
@@ -78,6 +81,7 @@ public class MostrarEtiquetas extends JDialog {
 				    modelotabla = new DefaultTableModel(columnas,0); //0 son las filas
 
 				    tabla1=new JTable(modelotabla);
+				    tabla1.setEnabled(false);
 				    getContentPane().add(tabla1);
 				    String[] id;
 				    //for para separar el id del nombre de la peli
@@ -89,7 +93,7 @@ public class MostrarEtiquetas extends JDialog {
 				    		nombre+=" "+id[j];
 				    	}
 				    	//para quitar la comilla final
-				    	nombre = nombre.substring(0,nombre.length()-1);
+				    	nombre = nombre.substring(0,nombre.length());
 				        modelotabla.addRow(new Object[] {id[0],nombre});
 				        }
 				    JScrollPane scroll11 = new JScrollPane(tabla1);

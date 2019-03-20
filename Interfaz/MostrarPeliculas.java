@@ -81,15 +81,15 @@ public class MostrarPeliculas extends JDialog {
 				JTable table = new JTable(modelo);
 				scrollPane.setViewportView(table);
 				ArrayList<String> lp=CatalogoPeliculas.getMiCPeli().getParejitasFelices();
-				
 				DefaultTableModel modelotabla;
 				JTable tabla1;
-				JScrollPane scroll1;
+				
 				Object columnas[] = {"ID","Película"};
 
 				    modelotabla = new DefaultTableModel(columnas,0); //0 son las filas
 
 				    tabla1=new JTable(modelotabla);
+				    tabla1.setEnabled(false);
 				    add(tabla1);
 				    String[] id;
 				    //for para separar el id del nombre de la peli
@@ -105,7 +105,9 @@ public class MostrarPeliculas extends JDialog {
 				        modelotabla.addRow(new Object[] {id[0],nombre});
 				        }
 				    JScrollPane scroll11 = new JScrollPane(tabla1);
-			          add(scroll11);
+				    JScrollPane scroll12 = new JScrollPane(tabla1);
+			          add(scroll11); 
+			          add(scroll12);
 				    }
 				    //CONTADORLISTA es para agregar n Filas, y esa n lo define un contador que va sumando 1, cada vez que 
 				    //se agrega una nueva persona (o sea, cada vez que se presiona el jbutton)
