@@ -1,4 +1,4 @@
-package packInterfazEuskoFlix;
+package Interfaces;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
@@ -12,7 +12,7 @@ import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
-import packEuskoFlix.*;
+import Euskoflix.*;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
 import java.awt.event.ActionListener;
@@ -40,7 +40,7 @@ public class MostrarEtiquetas extends JDialog {
 	 * Create the dialog.
 	 */
 	public MostrarEtiquetas() {
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 500, 500);
 		getContentPane().setLayout(new BorderLayout());
 		{
 			JPanel panel = new JPanel();
