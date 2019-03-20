@@ -1,4 +1,4 @@
-package packInterfazEuskoFlix;
+package Interfaces;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -21,7 +21,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.JList;
 import javax.swing.JLabel;
 import javax.swing.JTextArea;
-import packEuskoFlix.*;
+import Euskoflix.*;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
 public class MostrarPeliculas extends JDialog {
@@ -115,11 +115,5 @@ public class MostrarPeliculas extends JDialog {
 		}
 		{
 			contentPanel.setVisible(true);
-			
-			/*for (int i=0; i<lp.size();i++) {
-				String a= lp.get(i);
-				textArea.insert(a+"\n",i);
-		}*/
 		}
 	}
-
