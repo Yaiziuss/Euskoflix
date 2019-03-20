@@ -1,5 +1,5 @@
-package packInterfazEuskoFlix;
-import packEuskoFlix.*;
+package Interfaces;
+import Euskoflix.*;
 
 import java.awt.EventQueue;
 
@@ -16,13 +16,13 @@ import java.awt.Toolkit;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
-import javax.swing.table.DefaultTableModel;
+
+
 import javax.swing.JComboBox;
 import java.awt.Font;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.util.Map;
 import java.awt.event.ActionEvent;
 
@@ -42,6 +42,8 @@ public class MostrarDatosMenu extends javax.swing.JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
+					CargadorDatos cd= new CargadorDatos();
+					cd.cargarDatos();
 					MostrarDatosMenu window = new MostrarDatosMenu();
 					window.frmCargaDeDatos.setVisible(true);
 				} catch (Exception e) {
@@ -74,18 +76,17 @@ public class MostrarDatosMenu extends javax.swing.JFrame {
 			public void actionPerformed(ActionEvent e) {
 				//obtenemos la opción del combobox
 				int index = cboxVer.getSelectedIndex();
-				CargadorDatos cd= new CargadorDatos();
-				cd.cargarDatos();
+				//
 				if(index== 0){JOptionPane.showMessageDialog(null,"Selecciona otra opción, por favor");
-				} else if(index == 1){
+			} else if(index == 1){ 
 					MostrarPeliculas ventana = new MostrarPeliculas();
 					ventana.setVisible(true);
 				} else if (index == 2) {
-					MostrarEtiquetas ve= new MostrarEtiquetas();
-					ve.setVisible(true);
-				} else if (index == 3) {
 					MostrarUsuarios vu= new MostrarUsuarios();
 					vu.setVisible(true);
+				} else if (index == 3) {
+					MostrarEtiquetas ve= new MostrarEtiquetas();
+					ve.setVisible(true);
 				}
 			}
 		});
