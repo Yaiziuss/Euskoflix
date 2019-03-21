@@ -97,7 +97,7 @@ public class MostrarEtiquetas extends JDialog {
 				        modelotabla.addRow(new Object[] {id[0],nombre});
 				        }
 				    JScrollPane scroll11 = new JScrollPane(tabla1);
-			          getContentPane().add(scroll11);
+				    getContentPane().add(scroll11);
 				    }
 			}
 		}
