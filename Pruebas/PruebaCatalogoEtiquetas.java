@@ -40,6 +40,7 @@ private static CatalogoEtiquetas ce;
      * La etiqueta no existe (En este caso peta)
      */
     public void PruebaAnnadirPeliAEtiqueta() {
+    	 	assertEquals(ce.getApariciones("Hp1"),0);
             ce.annadirPeliAEtiqueta("Hp1");
             assertEquals(ce.getApariciones("Hp1"),1);
             assertNotEquals(ce.getApariciones("Hp1"),7);

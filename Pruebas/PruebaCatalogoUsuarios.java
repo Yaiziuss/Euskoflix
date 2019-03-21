@@ -32,15 +32,15 @@ class PruebaCatalogoUsuarios {
 	 */
 	@AfterEach
 	void tearDown() throws Exception {
-		cu=null;
+		cu.getMiCU().listaValoracionesUsuarios().clear();
 	}
 
 	@Test
 	public void PruebaannadirValoracionAUsuario() {
 		assertNotNull(cu.getMiCU());
+		assertEquals(cu.getMiCU().listaValoracionesUsuarios().size(),0);
 		cu.annadirValoracionAUsuario(1, 1, 4);
-		assertEquals(cu.getMiCU().hashCode(),1);
-		
+		assertEquals(cu.getMiCU().listaValoracionesUsuarios().size(),1);
 	}
 
 }

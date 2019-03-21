@@ -41,15 +41,18 @@ class PruebaCatalogoPeliculas {
 	/**
 	 * Vamos a probar si añade la pelicula correctamente o no
 	 */
+	
 	@Test
 	public void PruebaGetPelis() {
             assertNull(ct1.getPelicula(55));
             ct1.annadirPelicula(1,"Capitana Marvel");
             assertEquals(ct1.getPelicula(1).getNombre(),"Capitana Marvel");
+            assertNull(ct1.getPelicula(7));
 	}
 	/**
 	 * Vamos a probar si añade la pelicula correctamente o no
 	 */
+	
 	@Test
 	public void PruebaAnnadirPeli() {
 		ct1.annadirPelicula(1,"Capitana Marvel");
@@ -61,6 +64,7 @@ class PruebaCatalogoPeliculas {
 	/**
 	 * Vamos a probar si añade el número total de peliculas es correcto
 	 */
+	
 	@Test
 	public void PruebaTotalPelis() {
             assertEquals(0, ct1.getTotalPelis() );
@@ -71,7 +75,10 @@ class PruebaCatalogoPeliculas {
 	@Test
 	public void PruebaAnnadirEtiquetas() {
 		//assertNull(ct1.getListaPeliculas().getClass().)
+		ct1.annadirPelicula(1, "Capitana Marvel");
 		ct1.annadirEtiqueta(1, 7, "Marvel");
+		assertEquals(7, ct1.getPelicula(1).getPesoEtiqueta("Marvel"));
+		assertNotEquals(7, ct1.getPelicula(1).getPesoEtiqueta("Morvel"));
 		
 	}
 }
