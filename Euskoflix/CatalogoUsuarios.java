@@ -51,7 +51,6 @@ public class CatalogoUsuarios{
     
     private Set<Integer>getListaUsuarios() {return listaUsuarios.keySet(); }
     
-    
     public ArrayList<ArrayList<String>> listaValoracionesUsuarios(){
         ArrayList<ArrayList<String>> listaUV= new ArrayList<>();
         for(int clave : listaUsuarios.keySet()){
@@ -62,5 +61,17 @@ public class CatalogoUsuarios{
             listaUV.add(listaV);
         }
         return listaUV;
+    }
+    
+    public ArrayList<Float> obtenerPuntuaciones(int pIdUsuario){
+    	Usuario us=listaUsuarios.get(pIdUsuario);
+    	ArrayList<String> lc= us.getClaves();
+    	ArrayList<Float> lp= new ArrayList<>();
+    	for (int i=0; i<lc.size();i++) {
+    		int clave=Integer.parseInt(lc.get(i));
+    		float punt= us.getValoracion(clave);
+    		lp.add(punt);
+    	}
+    	return lp;
     }
 }
