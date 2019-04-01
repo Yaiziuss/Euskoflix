@@ -35,7 +35,7 @@ public class CatalogoEtiquetas {
         if(!this.listaApariciones.containsKey(pNombre)) this.listaApariciones.put(pNombre,1);
         else this.listaApariciones.put(pNombre, getApariciones(pNombre)+1);
     }
-    private Set<String> getListaEtiquetas() {return listaApariciones.keySet(); }
+    public Set<String> getListaEtiquetas() {return listaApariciones.keySet(); }
     
     public ArrayList<String> getParejitasFelices(){
     	ArrayList<String> listaE= new ArrayList<>();

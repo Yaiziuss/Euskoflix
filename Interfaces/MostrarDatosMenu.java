@@ -51,7 +51,6 @@ public class MostrarDatosMenu extends javax.swing.JFrame {
 			}
 		});
 	}
-	//hola
 
 	/**
 	 * Create the application.
@@ -87,6 +86,17 @@ public class MostrarDatosMenu extends javax.swing.JFrame {
 				} else if (index == 2) {
 					MostrarEtiquetas ve= new MostrarEtiquetas();
 					ve.setVisible(true);
+				} else if (index == 4) {
+					String[] options = {"Contenido", "Usuarios", "Peliculas", "Menu principal"};
+					int seleccion = JOptionPane.showOptionDialog(null, "Seleccione una opción", "Catalogo de modelos", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[3]);
+					if(seleccion==0) {
+						PuntuacionContenido pc= new PuntuacionContenido();
+						pc.setVisible(true);
+					} else if (seleccion==3) {
+						
+					} else {
+						JOptionPane.showMessageDialog(null,"Opción en mantenimiento. Sentimos las molestias");
+					}
 				}
 			}
 		});
@@ -103,7 +113,7 @@ public class MostrarDatosMenu extends javax.swing.JFrame {
 		
 		lblEuskoflix = new JLabel("EUSKOFLIX");
 		lblEuskoflix.setForeground(Color.RED);
-		lblEuskoflix.setFont(new Font("Lucida Grande", Font.BOLD, 20));
+		lblEuskoflix.setFont(new Font("Lucida Grande", Font.BOLD, 30));
 		lblEuskoflix.setHorizontalAlignment(SwingConstants.CENTER);
 		frmCargaDeDatos.getContentPane().add(lblEuskoflix, BorderLayout.NORTH);
 		
@@ -113,6 +123,7 @@ public class MostrarDatosMenu extends javax.swing.JFrame {
 		cboxVer.addItem("Ver peliculas cargadas");
 		cboxVer.addItem("Ver valoraciones cargadas");
 		cboxVer.addItem("Ver usuarios cargados");
+		cboxVer.addItem("¿Qué puntuación le daría?");
 	}
 
 }

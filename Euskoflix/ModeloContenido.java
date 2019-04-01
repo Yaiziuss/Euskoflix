@@ -18,4 +18,9 @@ public class ModeloContenido extends Modelo {
 		// TODO Auto-generated constructor stub
 	}
 	
+	public float obtenerPuntuacion(int pIdUsuario, int pIdPeli) {
+		
+	}
+	
+	
 }

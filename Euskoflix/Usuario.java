@@ -32,12 +32,14 @@ public class Usuario{
     }
 
     /**
-     * @pre la valorción tiene que existir
+     * Cambiar!!! /TO-DO 
      * @param pClave
      * @return
      */
+    
+    //TO DO
     public float getValoracion(int pClave){
-        return this.listaValoraciones.get(pClave);
+        return (this.listaValoraciones.get(pClave)==null)?0:listaValoraciones.get(pClave); 
     }
     
     public ArrayList<String> getClaves(){

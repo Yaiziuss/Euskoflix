@@ -27,14 +27,6 @@ public class CatalogoUsuarios{
     
     public static CatalogoUsuarios getMiCU(){  return miCU;  }
     
-  /*  public ArrayList<String> getParejitasFelices(){
-    	ArrayList<String> listaP= new ArrayList<>();
-    	for(int clave: getListaPeliculas()) { 
-            listaP.add(clave+" "+this.listaPeliculas.get(clave).getNombre());}
-    	return (listaP==null)?null:listaP;
-    	
-    }*/
-    
     /**
      * Añade la valoracion de pIdPeli a la lista de valoraciones de pIdUsuario y añade pIdUsuario si no existe
      * @param pIdUsuario
@@ -73,5 +65,60 @@ public class CatalogoUsuarios{
     		lp.add(punt);
     	}
     	return lp;
+    }
+    
+    public ArrayList<Float> obtenerPuntuacionesPelicula(int pIdPeli){
+    	ArrayList<Float> lp=new ArrayList<>();
+    	Set<Integer> clU= getListaUsuarios();
+    	for (int clave : clU) {
+    		Float val=listaUsuarios.get(clave).getValoracion(pIdPeli);
+    		if (val!=null) {
+    			lp.add(val);
+    		}
+    	}
+    	return lp;
+    }
+    
+    /**
+     * Con ente método sacamos la matriz de puntuaciones de todos los usuarios que hayan visto la pelicula a predecir la puntuacion
+     * @param pIdUsuario
+     * @param pIdPeli
+     * @return matrix
+     */
+    public Float[][] matrizPuntuaciones(int pIdUsuario, int pIdPeli){
+    	Usuario us=listaUsuarios.get(pIdUsuario);
+    	ArrayList<String> lisP=us.getClaves(); //Lista de peliculas del usuario pIdUsuario
+    	Float[][] matrix= new Float [us.getClaves().size()][getListaUsuarios().size()]; //Filas--> Peliculas, Columnas--> Usuarios
+    	Set<Integer> clU= getListaUsuarios();
+    	int f=0;
+    	for (int i=0; i<lisP.size(); i++) {
+    		matrix[f][i]=  Float.parseFloat(lisP.get(i));
+    		}
+    	for (int clave : clU) {
+    		Float val=listaUsuarios.get(clave).getValoracion(pIdPeli);
+    		if (val!=null) {
+    			//obtenemos lista de peliculas de usuario ux
+    			Usuario ux=listaUsuarios.get(clave);
+    			f++;
+    			for (int j=0;j<ux.getClaves().size();j++) { //recorro la lista de peliculas del usuario ux
+    				String peliUx=String.valueOf(matrix[0][j]);
+    				if (ux.getClaves().contains(peliUx)) {
+    					matrix[f][j]=(ux.getValoracion(Integer.parseInt(peliUx))); /*Si el usuario ha visto la peli añadimos su valoracion 
+    					en la misma columna que la valoración de la pelicula del usuario pIdUsuario*/
+    				}
+    			}
+    		}
+    	}
+    	return matrix;
+	}
+    
+    public Float[][] matrizPuntuacionesEtiquetas(){
+    	//matriz fila-> Usuario; Columna -> Etiqueta
+    	Float[][] matriz= new Float[listaUsuarios.size()][CatalogoEtiquetas.getMiCEti().getListaEtiquetas().size()];
+    	for(Usuario u: listaUsuarios.values()) {
+    		for
+    	}
+    	
+    	return matriz;
     }
 }
