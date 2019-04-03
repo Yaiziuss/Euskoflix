@@ -92,10 +92,10 @@ public class MostrarDatosMenu extends javax.swing.JFrame {
 					if(seleccion==0) {
 						PuntuacionContenido pc= new PuntuacionContenido();
 						pc.setVisible(true);
-					} else if (seleccion==3) {
-						
-					} else {
+					} else if (seleccion==1 || seleccion==2) {
 						JOptionPane.showMessageDialog(null,"Opción en mantenimiento. Sentimos las molestias");
+					} else {
+						
 					}
 				}
 			}
