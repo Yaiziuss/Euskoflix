@@ -5,6 +5,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Map;
+import java.util.Map.Entry;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -21,16 +23,17 @@ public class CargadorDatos {
 URL url = ModeloValoracion.class.getClassLoader().getResource("./packArchivos/movie-ratings.csv");
 br = new BufferedReader(new FileReader(url.getPath()));*/
 
-	 private static final String RUTA_F_ETIQUETAS="src/Datos/movie-tags.csv";
-	 private static final String RUTA_F_PELICULAS="src/Datos/movie-titles.csv";
-	 private static final String RUTA_F_VALORACIONES="src/Datos/movie-ratings.csv";
-	 private static final String SEPARADOR1=";";
-	 private static final String SEPARADOR2=",";
+    private static final String RUTA_F_ETIQUETAS="src/Datos/movie-tags.csv";
+    private static final String RUTA_F_PELICULAS="src/Datos/movie-titles.csv";
+    private static final String RUTA_F_VALORACIONES="src/Datos/movie-ratings.csv";
+    private static final String SEPARADOR1=";";
+    private static final String SEPARADOR2=",";
     
     public static void cargarDatos(){
         cargarFicheroPeliculas();
         cargarFicheroEtiquetas();
         cargarFicheroValoraciones();
+        cargarFiltroContenido();
     }
     
     /**
@@ -130,4 +133,12 @@ br = new BufferedReader(new FileReader(url.getPath()));*/
         }
     }
     
+    private static void cargarFiltroContenido(){
+        ArrayList<ArrayList<Entry<Integer,Float>>> listaEntriesUsuario = CatalogoUsuarios.getMiCU().listaEntriesDeUsuarios();
+        int idUsuario=0;
+        for(ArrayList<Entry<Integer,Float>> listaEntriesU : listaEntriesUsuario){
+            idUsuario++;
+            FiltradoContenido.getMiFiltro().annadirModeloPersona(idUsuario, listaEntriesU);
+        }
+    }
 }

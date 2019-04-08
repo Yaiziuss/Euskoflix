@@ -4,14 +4,18 @@
 package Euskoflix;
 
 import java.util.ArrayList;
+import java.util.Map.Entry;
 
 /**
  * @author yaiza
  *
  */
 public class Operaciones {
+	private static Operaciones miOperacion= new Operaciones();
 	
-	public Operaciones() {}
+	private Operaciones() {}
+	
+	public static Operaciones getOperacion(){ return miOperacion;}
 	
 	//Modificar para poder usar tanto para peliculas como usuario
 	
@@ -35,4 +39,26 @@ public class Operaciones {
 		destip=destip/numVal;
 		return Math.sqrt(destip);
 	}
+        
+        public double cosenoVectorial(ArrayList<Entry<String,Float>> listaEntriesPeliculas, ArrayList<Entry<String,Float>> listaEntriesUsuario, int idUsuario){
+            return productoEscalar(listaEntriesPeliculas, idUsuario)/(norma(listaEntriesPeliculas)*norma(listaEntriesUsuario));
+        }
+        
+        private double norma(ArrayList<Entry<String,Float>> listaEntries){
+            double modulo=0;
+            for(Entry<String,Float> par: listaEntries){
+                modulo+= Math.pow(par.getValue(),2);
+            }
+            return Math.sqrt(modulo);
+        }
+        
+        private double productoEscalar(ArrayList<Entry<String,Float>> EntriesPelicula, int idUsuario){
+            double dot=0;
+            for(Entry<String,Float> par: EntriesPelicula){
+                dot+= par.getValue()*FiltradoContenido.getMiFiltro().getPesoEtiquetaUsuario(idUsuario, par.getKey());
+            }
+            return dot;
+        }
+        
+        
 }

@@ -18,6 +18,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
 import Euskoflix.*;
+import java.util.Map.Entry;
 import javax.swing.SwingConstants;
 
 public class MostrarUsuarios extends JDialog {
@@ -72,40 +73,27 @@ public class MostrarUsuarios extends JDialog {
 			scrollPane.setViewportView(table);
 			DefaultTableModel modelotabla;
 			JTable tabla1;			
-			ArrayList<ArrayList<String>> le = CatalogoUsuarios.getMiCU().listaValoracionesUsuarios();
-			Object columnas[] = {"Id Pelicula","Id Usuario","Valoración"};
+			ArrayList<ArrayList<Entry<Integer,Float>>> listaEntriesUsuarios = CatalogoUsuarios.getMiCU().listaEntriesDeUsuarios();
+			Object columnas[] = {"Id Usuario","Pelicula","Valoración"};
 
-			    modelotabla = new DefaultTableModel(columnas,0); //0 son las filas
+                        modelotabla = new DefaultTableModel(columnas,0); //0 son las filas
 
-			    tabla1=new JTable(modelotabla);
-			    tabla1.setEnabled(false);
-			    getContentPane().add(tabla1);
-			    ArrayList<String> aux;
-			    String[] id;
-			    //for para separar el id de la valoracion de la peli y del id de esta
-			    for(int i=0;i<le.size();i++){
-			    	aux=le.get(i);
-			    	for (int k=1; k<aux.size();k++) {
-			    		id = aux.get(k).split(" ");
-				    	String nombre="";
-				    	String valoracion="";
-				    	//for que junta el id de las pelis y el id del usuario con la valoracion, ya que con el split separa en trozos, con todos los espacios
-			    	for(int j=1;j<id.length;j++){
-			    		nombre+=" "+id[j];
-			    		valoracion+=" "+" "+id[j];
-			    		
-			    	}
-			    
-			    	//para quitar la comilla final
-			    	nombre = nombre.substring(0,nombre.length()-1);
-			        modelotabla.addRow(new Object[] {id[0],nombre,valoracion});
-			        }
-			    }
-			    JScrollPane scroll11 = new JScrollPane(tabla1);
-		          getContentPane().add(scroll11);
-			
-			
-			}
+                        tabla1=new JTable(modelotabla);
+                        tabla1.setEnabled(false);
+                        getContentPane().add(tabla1);
+                        int idUsuario=0;
+                        //for para separar el id de la valoracion de la peli y del id de esta
+                        for(ArrayList<Entry<Integer,Float>> entriesUsuario : listaEntriesUsuarios){
+                            idUsuario++;
+                            for(Entry<Integer,Float> par : entriesUsuario) {
+                                modelotabla.addRow(new Object[] {idUsuario,CatalogoPeliculas.getMiCPeli().getPelicula(par.getKey()).getNombre(),par.getValue()});
+                            }
+                        }
+                        JScrollPane scroll11 = new JScrollPane(tabla1);
+                        getContentPane().add(scroll11);
+
+
+                    }
 		}		
 		}
 

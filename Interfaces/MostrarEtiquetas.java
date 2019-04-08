@@ -17,6 +17,8 @@ import javax.swing.JTable;
 import javax.swing.JScrollPane;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.util.Map;
+import java.util.Map.Entry;
 
 public class MostrarEtiquetas extends JDialog {
 
@@ -75,7 +77,7 @@ public class MostrarEtiquetas extends JDialog {
 				
 				DefaultTableModel modelotabla;
 				JTable tabla1;
-				ArrayList<String> le = CatalogoEtiquetas.getMiCEti().getParejitasFelices();
+				ArrayList<Entry<String,Integer>> le = CatalogoEtiquetas.getMiCEti().getParejitasFelices();
 				Object columnas[] = {"Nº de apariciones","Comentario"};
 
 				    modelotabla = new DefaultTableModel(columnas,0); //0 son las filas
@@ -83,18 +85,8 @@ public class MostrarEtiquetas extends JDialog {
 				    tabla1=new JTable(modelotabla);
 				    tabla1.setEnabled(false);
 				    getContentPane().add(tabla1);
-				    String[] id;
-				    //for para separar el id del nombre de la peli
-				    for(int i=0;i<le.size();i++){
-				    	id = le.get(i).split(" ");
-				    	String nombre="";
-				    	//for que junta el nombre de las pelis, ya uqe con el split separa en trozos, con todos los espacios
-				    	for(int j=1;j<id.length;j++){
-				    		nombre+=" "+id[j];
-				    	}
-				    	//para quitar la comilla final
-				    	nombre = nombre.substring(0,nombre.length());
-				        modelotabla.addRow(new Object[] {id[0],nombre});
+                                    for(Entry<String,Integer> par: le){
+				        modelotabla.addRow(new Object[] {par.getKey(),par.getValue()});
 				        }
 				    JScrollPane scroll11 = new JScrollPane(tabla1);
 				    getContentPane().add(scroll11);

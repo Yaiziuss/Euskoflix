@@ -22,6 +22,7 @@ import javax.swing.JList;
 import javax.swing.JLabel;
 import javax.swing.JTextArea;
 import Euskoflix.*;
+import java.util.Map.Entry;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
 public class MostrarPeliculas extends JDialog {
@@ -80,39 +81,31 @@ public class MostrarPeliculas extends JDialog {
 				DefaultTableModel modelo = new DefaultTableModel(); 
 				JTable table = new JTable(modelo);
 				scrollPane.setViewportView(table);
-				ArrayList<String> lp=CatalogoPeliculas.getMiCPeli().getParejitasFelices();
+				ArrayList<Entry<Integer,Pelicula>> lp=CatalogoPeliculas.getMiCPeli().getIdsYPeliculas();
 				DefaultTableModel modelotabla;
 				JTable tabla1;
 				
 				Object columnas[] = {"ID","Película"};
 
-				    modelotabla = new DefaultTableModel(columnas,0); //0 son las filas
+                                modelotabla = new DefaultTableModel(columnas,0); //0 son las filas
 
-				    tabla1=new JTable(modelotabla);
-				    tabla1.setEnabled(false);
-				    add(tabla1);
-				    String[] id;
-				    //for para separar el id del nombre de la peli
-				    for(int i=0;i<lp.size();i++){
-				    	id = lp.get(i).split(" ");
-				    	String nombre="";
-				    	//for que junta el nombre de las pelis, ya uqe con el split separa en trozos, con todos los espacios
-				    	for(int j=1;j<id.length;j++){
-				    		nombre+=" "+id[j];
-				    	}
-				    	//para quitar la comilla final
-				    	nombre = nombre.substring(0,nombre.length()-1);
-				        modelotabla.addRow(new Object[] {id[0],nombre});
-				        }
-				    JScrollPane scroll11 = new JScrollPane(tabla1);
-				    JScrollPane scroll12 = new JScrollPane(tabla1);
-			          add(scroll11); 
-			          add(scroll12);
-				    }
-				    //CONTADORLISTA es para agregar n Filas, y esa n lo define un contador que va sumando 1, cada vez que 
-				    //se agrega una nueva persona (o sea, cada vez que se presiona el jbutton)
+                                tabla1=new JTable(modelotabla);
+                                tabla1.setEnabled(false);
+                                add(tabla1);
+                                
+                                //for para separar el id del nombre de la peli
+                                for(Entry<Integer,Pelicula> par: lp){
+                                    modelotabla.addRow(new Object[] {par.getKey(),par.getValue().getNombre()});
+                                    }
+                                JScrollPane scroll11 = new JScrollPane(tabla1);
+                                JScrollPane scroll12 = new JScrollPane(tabla1);
+                                add(scroll11); 
+                                add(scroll12);
+                                }
+                                //CONTADORLISTA es para agregar n Filas, y esa n lo define un contador que va sumando 1, cada vez que 
+                                //se agrega una nueva persona (o sea, cada vez que se presiona el jbutton)
 
-				    
+
 			}
 		}
 		{

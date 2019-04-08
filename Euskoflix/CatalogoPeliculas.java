@@ -33,12 +33,11 @@ public class CatalogoPeliculas{
     //encapsular
     public Set<Integer> getListaPeliculas() {return listaPeliculas.keySet(); }
     
-    public ArrayList<String> getParejitasFelices(){
-    	ArrayList<String> listaP= new ArrayList<>();
-    	for(int clave: getListaPeliculas()) { 
-            listaP.add(clave+" "+this.listaPeliculas.get(clave).getNombre());}
-    	return (listaP==null)?null:listaP;
-    	
+    public ArrayList<Entry<Integer,Pelicula>> getIdsYPeliculas(){
+    	ArrayList<Entry<Integer,Pelicula>> listaP= new ArrayList<>();
+    	for(Entry<Integer,Pelicula> par: listaPeliculas.entrySet()) { 
+            listaP.add(par);
+        }return (listaP==null)?null:listaP;
     }
     
     public Pelicula getPelicula(int pIdPeli){ return (this.listaPeliculas.get(pIdPeli)==null)?null:listaPeliculas.get(pIdPeli);}
@@ -62,6 +61,8 @@ public class CatalogoPeliculas{
     public int getTotalPelis(){ return this.listaPeliculas.size();}
     
     private Iterator<Entry<Integer,Pelicula>> getIterador(){return listaPeliculas.entrySet().iterator();}
+
+    
     
 
 }

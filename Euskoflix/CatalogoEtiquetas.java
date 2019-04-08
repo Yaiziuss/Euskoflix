@@ -37,10 +37,10 @@ public class CatalogoEtiquetas {
     }
     public Set<String> getListaEtiquetas() {return listaApariciones.keySet(); }
     
-    public ArrayList<String> getParejitasFelices(){
-    	ArrayList<String> listaE= new ArrayList<>();
-    	for(String clave: getListaEtiquetas()) { 
-            listaE.add(this.listaApariciones.get(clave)+" "+clave);}
+    public ArrayList<Entry<String,Integer>> getParejitasFelices(){
+    	ArrayList<Entry<String,Integer>> listaE= new ArrayList<>();
+    	for(Entry<String,Integer> par: listaApariciones.entrySet()) { 
+            listaE.add(par);}
     	return (listaE==null)?null:listaE;
     	
     }

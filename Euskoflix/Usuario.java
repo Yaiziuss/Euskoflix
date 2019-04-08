@@ -4,6 +4,7 @@ package Euskoflix;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -17,6 +18,7 @@ import java.util.Map;
  */
 public class Usuario{
     private Map<Integer,Float> listaValoraciones;
+    
 
     public Usuario(){
         this.listaValoraciones=new HashMap<>();
@@ -42,11 +44,12 @@ public class Usuario{
         return (this.listaValoraciones.get(pClave)==null)?0:listaValoraciones.get(pClave); 
     }
     
-    public ArrayList<String> getClaves(){
-        ArrayList<String> listaC = new ArrayList<>();
-        for(int c: listaValoraciones.keySet()){
-            listaC.add(String.valueOf(c));
-        }return listaC;
+    public ArrayList<Entry<Integer,Float>> getPeliculaYValoracion(){
+        ArrayList<Entry<Integer,Float>> lista = new ArrayList<>();
+        for(Entry<Integer,Float> e: listaValoraciones.entrySet()){lista.add(e);}
+        return lista;
     }
+    
+    
  
 }

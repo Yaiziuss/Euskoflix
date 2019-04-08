@@ -1,8 +1,10 @@
 package Euskoflix;
 
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 
 /*
@@ -38,5 +40,13 @@ public class Pelicula{
     public float getPesoEtiqueta(String pEtiqueta){ return (this.pesoEtiquetas.get(pEtiqueta)==null)?0:pesoEtiquetas.get(pEtiqueta);}
 
     public Set<String> getNombresEtiquetas() { return pesoEtiquetas.keySet(); }
+    
+    public ArrayList<Entry<String,Float>> getEtiquetasYPesos(){
+        ArrayList<Entry<String,Float>> lista = new ArrayList<>();
+        for(Entry<String,Float> e: pesoEtiquetas.entrySet()){lista.add(e);}
+        return lista;
+    }
+    
+    
     
 }
