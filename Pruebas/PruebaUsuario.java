@@ -27,13 +27,13 @@ class PruebaUsuario {
 
 	@Test
 	public void pruebaAnnadirValoració() {
-		assertEquals(u1.getClaves().size(),0);
+		assertEquals(u1.getPeliculaYValoracion().size(),0);
 		u1.annadirValoracion(1, 4);
-		assertEquals(u1.getClaves().size(),1);
-		assertNotEquals(u1.getClaves().size(),0);
+		assertEquals(u1.getPeliculaYValoracion().size(),1);
+		assertNotEquals(u1.getPeliculaYValoracion().size(),0);
 		u1.annadirValoracion(2, 4);
-		assertEquals(u1.getClaves().size(),2);
-		assertNotEquals(u1.getClaves().size(),1);
+		assertEquals(u1.getPeliculaYValoracion().size(),2);
+		assertNotEquals(u1.getPeliculaYValoracion().size(),1);
 	}
 
 	@Test
