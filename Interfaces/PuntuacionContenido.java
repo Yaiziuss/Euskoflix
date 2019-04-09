@@ -6,6 +6,8 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Map.Entry;
 
 import javax.swing.Action;
 import javax.swing.JButton;
@@ -14,7 +16,15 @@ import javax.swing.JPanel;
 import javax.swing.border.Border;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
+
+import Euskoflix.CatalogoPeliculas;
+import Euskoflix.CatalogoUsuarios;
+import Euskoflix.FiltradoContenido;
+import Euskoflix.Pelicula;
+import Euskoflix.Usuario;
+
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
 import javax.swing.JTextArea;
@@ -80,7 +90,27 @@ public class PuntuacionContenido extends JDialog {
 					// TODO Auto-generated method stub
 					int idU = Integer.valueOf(textAreaUsu.getText());
 					int idP = Integer.valueOf(textAreaPeli.getText());
-					
+					Pelicula peli = CatalogoPeliculas.getMiCPeli().getPelicula(idP);
+					if(!CatalogoUsuarios.getMiCU().estaUsuario(idU)){ //Si el usuario no existe
+						JOptionPane.showMessageDialog(null,"No existe el usuario introducido");
+					}else if(peli == null){ //Si la película no existe
+						JOptionPane.showMessageDialog(null,"No existe la película introducida");
+					}else{
+						//si el usuario existe y tiene la película valorada, sacar la valoración
+						//si el usuario existe pero no tiene la película valorada, calcular la valoración
+						Usuario usu = CatalogoUsuarios.getMiCU().getUsuario(idU);
+						float valor = usu.getValoracion(idP);
+						if(valor != 0){
+							//mostramos la valoración directamente sin modificar la variable valor
+							JOptionPane.showMessageDialog(null,"El usuario con ID "+idU+" ha valorado la película en "+valor+" puntos");
+						}else{
+							//calculamos la valoración
+							double notaCalculada = FiltradoContenido.getMiFiltro().calcularNotaUsuario(idU, idP);
+							JOptionPane.showMessageDialog(null,"El usuario con ID "+idU+" ha valorado la película en "+notaCalculada+" puntos");
+						}
+						
+						
+					}
 				}
 		});
 		
