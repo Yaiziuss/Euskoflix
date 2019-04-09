@@ -26,7 +26,7 @@ public class CatalogoUsuarios{
     }
     
     public static CatalogoUsuarios getMiCU(){  return miCU;  }
-    
+    public Usuario getUsuario(int pIDUsu){return listaUsuarios.get(pIDUsu);}
     /**
      * Añade la valoracion de pIdPeli a la lista de valoraciones de pIdUsuario y añade pIdUsuario si no existe
      * @param pIdUsuario
