@@ -27,12 +27,11 @@ public class FiltradoContenido extends Filtrado {
     
     public void annadirModeloPersona(int idUsuario, ArrayList<Entry<Integer,Float>> valoracionesUsuario ){
         Map<String,Float> modeloPersona = new HashMap<>();
-        for(Entry<Integer,Float> parPeliValoracion: valoracionesUsuario){
-            float valoracion= parPeliValoracion.getValue();
-            if(valoracion<3.5)continue;
+        for(Entry<Integer,Float> parPeliValoracion: valoracionesUsuario){  
+            if(parPeliValoracion.getValue()<3.5)continue;
             //recorre la lista de pesos de etiquetas de cada pelicula y multiplica la valoracion por el peso, si la etiqueta ya existe en el hashmap suma el nuevo valor al original
             for(Entry<String,Float> parEtiquetaPeso: CatalogoPeliculas.getMiCPeli().getPelicula(parPeliValoracion.getKey()).getEtiquetasYPesos()){
-                float resultado= valoracion*parEtiquetaPeso.getValue();
+                float resultado= parEtiquetaPeso.getValue();
                 if(modeloPersona.containsKey(parEtiquetaPeso.getKey())){
                     resultado+=modeloPersona.get(parEtiquetaPeso.getKey());
                 }

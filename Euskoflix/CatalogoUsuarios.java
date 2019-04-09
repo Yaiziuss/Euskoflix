@@ -41,13 +41,14 @@ public class CatalogoUsuarios{
     }
    // private Iterator<Entry<Integer,Usuario>> getIterador(){return listaUsuarios.entrySet().iterator();}
     
-    public ArrayList<ArrayList<Entry<Integer,Float>>> listaEntriesDeUsuarios(){
-        ArrayList<ArrayList<Entry<Integer,Float>>> listaVU= new ArrayList<>();
-        int i=1;
+    public ArrayList<Entry<Integer,ArrayList<Entry<Integer,Float>>>> listaEntriesDeUsuarios(){
+        ArrayList<Entry<Integer,ArrayList<Entry<Integer,Float>>>> listaVU= new ArrayList<>();
+        Map<Integer,ArrayList<Entry<Integer,Float>>> aux = new HashMap();
         for(int clave : listaUsuarios.keySet()){
-        	System.out.println(i +" "+clave);
-            listaVU.add(listaUsuarios.get(clave).getPeliculaYValoracion());
-            i++;
+            aux.put(clave,listaUsuarios.get(clave).getPeliculaYValoracion());
+        }
+        for(Entry<Integer, ArrayList<Entry<Integer, Float>>> c: aux.entrySet()){
+            listaVU.add(c);
         }
         return listaVU;
     }

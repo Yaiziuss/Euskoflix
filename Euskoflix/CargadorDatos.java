@@ -134,11 +134,9 @@ br = new BufferedReader(new FileReader(url.getPath()));*/
     }
     
     private static void cargarFiltroContenido(){
-        ArrayList<ArrayList<Entry<Integer,Float>>> listaEntriesUsuario = CatalogoUsuarios.getMiCU().listaEntriesDeUsuarios();
-        int idUsuario=0;
-        for(ArrayList<Entry<Integer,Float>> listaEntriesU : listaEntriesUsuario){
-            idUsuario++;
-            FiltradoContenido.getMiFiltro().annadirModeloPersona(idUsuario, listaEntriesU);
+        ArrayList<Entry<Integer,ArrayList<Entry<Integer,Float>>>> listaEntriesUsuario = CatalogoUsuarios.getMiCU().listaEntriesDeUsuarios();
+        for(Entry<Integer,ArrayList<Entry<Integer,Float>>> listaEntriesU : listaEntriesUsuario){
+            FiltradoContenido.getMiFiltro().annadirModeloPersona(listaEntriesU.getKey(), listaEntriesU.getValue());
         }
     }
 }
