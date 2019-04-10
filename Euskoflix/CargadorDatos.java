@@ -23,9 +23,9 @@ public class CargadorDatos {
 URL url = ModeloValoracion.class.getClassLoader().getResource("./packArchivos/movie-ratings.csv");
 br = new BufferedReader(new FileReader(url.getPath()));*/
 
-    private static final String RUTA_F_ETIQUETAS="src/Datos/movie-tags.csv";
-    private static final String RUTA_F_PELICULAS="src/Datos/movie-titles.csv";
-    private static final String RUTA_F_VALORACIONES="src/Datos/movie-ratings.csv";
+    private static final String RUTA_F_ETIQUETAS="src//Datos//movie-tags.csv";
+    private static final String RUTA_F_PELICULAS="src//Datos//movie-titles.csv";
+    private static final String RUTA_F_VALORACIONES="src//Datos//movie-ratings.csv";
     private static final String SEPARADOR1=";";
     private static final String SEPARADOR2=",";
     

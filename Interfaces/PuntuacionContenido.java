@@ -6,6 +6,8 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Map.Entry;
 
@@ -58,11 +60,11 @@ public class PuntuacionContenido extends JDialog {
 		this.setResizable(false);
 		
 		JLabel lblIdUsuario = new JLabel("ID Usuario");
-		lblIdUsuario.setBounds(64, 135, 72, 16);
+		lblIdUsuario.setBounds(64, 135, 117, 16);
 		contentPanel.add(lblIdUsuario);
 		
 		JLabel lblIdPelicula = new JLabel("ID Pelicula");
-		lblIdPelicula.setBounds(296, 135, 72, 16);
+		lblIdPelicula.setBounds(296, 135, 117, 16);
 		contentPanel.add(lblIdPelicula);
 		
 		JTextArea textAreaPeli = new JTextArea();
@@ -91,7 +93,7 @@ public class PuntuacionContenido extends JDialog {
 					int idU = Integer.valueOf(textAreaUsu.getText());
 					int idP = Integer.valueOf(textAreaPeli.getText());
 					Pelicula peli = CatalogoPeliculas.getMiCPeli().getPelicula(idP);
-					if(!CatalogoUsuarios.getMiCU().estaUsuario(idU)){ //Si el usuario no existe
+					if(CatalogoUsuarios.getMiCU().getUsuario(idU)==null){ //Si el usuario no existe
 						JOptionPane.showMessageDialog(null,"No existe el usuario introducido");
 					}else if(peli == null){ //Si la película no existe
 						JOptionPane.showMessageDialog(null,"No existe la película introducida");
@@ -106,10 +108,10 @@ public class PuntuacionContenido extends JDialog {
 						}else{
 							//calculamos la valoración
 							double notaCalculada = FiltradoContenido.getMiFiltro().calcularNotaUsuario(idU, idP);
-							JOptionPane.showMessageDialog(null,"El usuario con ID "+idU+" ha valorado la película en "+notaCalculada+" puntos");
+							BigDecimal resul = new BigDecimal(notaCalculada);
+							resul = resul.setScale(4, RoundingMode.DOWN);
+							JOptionPane.showMessageDialog(null,"El usuario con ID "+idU+" valoraría la película en "+resul+" puntos");
 						}
-						
-						
 					}
 				}
 		});

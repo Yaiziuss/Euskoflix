@@ -45,7 +45,9 @@ public class MostrarDatosMenu extends javax.swing.JFrame {
 					CargadorDatos.cargarDatos();
 					//1/280
 					
-					System.out.println(FiltradoContenido.getMiFiltro().calcularNotaUsuario(4043, 11));
+				/*	System.out.println(FiltradoContenido.getMiFiltro().calcularNotaUsuario(4043, 807));
+					System.out.println(FiltradoContenido.getMiFiltro().calcularNotaUsuario(4043, 187));
+					System.out.println(FiltradoContenido.getMiFiltro().calcularNotaUsuario(4043, 11));  */
 					MostrarDatosMenu window = new MostrarDatosMenu();
 					window.frmCargaDeDatos.setVisible(true);
 				} catch (Exception e) {
