@@ -6,6 +6,8 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
@@ -70,10 +72,43 @@ public class PuntuacionContenido extends JDialog {
 		JTextArea textAreaPeli = new JTextArea();
 		textAreaPeli.setColumns(1);
 		textAreaPeli.setBounds(296, 163, 72, 16);
+		textAreaPeli.addKeyListener(new KeyAdapter()
+		{
+		   public void keyTyped(KeyEvent e)
+		   {
+		      char caracter = e.getKeyChar();
+
+		      // Verificar si la tecla pulsada no es un digito
+		      if(!(((caracter < '0') ||
+		         (caracter > '9')) &&
+		         (caracter != '\b' /*corresponde a BACK_SPACE*/)))
+		      {
+		    	  //no hacer nada
+		      }else{
+		    	// ignorar el evento de teclado
+		    	  e.consume();
+		      }
+		   }
+		});
 		contentPanel.add(textAreaPeli);
 		
 		JTextArea textAreaUsu = new JTextArea();
 		textAreaUsu.setBounds(64, 163, 72, 16);
+		textAreaUsu.addKeyListener(new KeyAdapter()
+		{
+		   public void keyTyped(KeyEvent e)
+		   {
+		      char caracter = e.getKeyChar();
+
+		      // Verificar si la tecla pulsada no es un digito
+		      if(!(((caracter < '0') ||
+		         (caracter > '9')) &&
+		         (caracter != '\b' /*corresponde a BACK_SPACE*/)))
+		      {
+		         //no hacer nada
+		      }else{e.consume();}// ignorar el evento de teclado
+		   }
+		});
 		contentPanel.add(textAreaUsu);
 		
 		JLabel lblEuskoflix = new JLabel("EUSKOFLIX");
