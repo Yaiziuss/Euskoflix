@@ -33,13 +33,7 @@ public class Usuario{
         this.listaValoraciones.put(pIdPeli,pValoracion);
     }
 
-    /**
-     * Cambiar!!! /TO-DO 
-     * @param pClave
-     * @return
-     */
     
-    //TO DO
     public float getValoracion(int pClave){
         return (this.listaValoraciones.get(pClave)==null)?0:listaValoraciones.get(pClave); 
     }
