@@ -54,7 +54,7 @@ public class Operaciones {
             return productoEscalar(listaEntriesPeliculas, idUsuario)/(norma(listaEntriesPeliculas)*norma(listaEntriesUsuario));
         }
         
-        private double norma(ArrayList<Entry<String,Float>> listaEntries){
+        public double norma(ArrayList<Entry<String,Float>> listaEntries){
             double modulo=0;
             for(Entry<String,Float> par: listaEntries){
                 modulo+= Math.pow(par.getValue(),2);

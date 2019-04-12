@@ -104,6 +104,7 @@ br = new BufferedReader(new FileReader(url.getPath()));*/
         catPeliculas.annadirEtiqueta(Integer.parseInt(fields[0]), apariciones, fields[1]);
         catEtiquetas.annadirPeliAEtiqueta(fields[1]);
         calcularPesoEtiquetas();
+        normalizarPesos();
     }
     
     /**
@@ -114,7 +115,10 @@ br = new BufferedReader(new FileReader(url.getPath()));*/
         ArrayList<String> listaValoraciones = getLineasFichero(RUTA_F_VALORACIONES);
         for(String linea: listaValoraciones){
             String [] fields = linea.split(SEPARADOR2);
-            catUsuarios.annadirValoracionAUsuario(Integer.parseInt(fields[0]), Integer.parseInt(fields[1]), Float.parseFloat(fields[2]));
+            int idPeli= Integer.parseInt(fields[1]);
+            int idUsuario=Integer.parseInt(fields[0]);
+            catUsuarios.annadirValoracionAUsuario(idUsuario, idPeli, Float.parseFloat(fields[2]));
+            CatalogoPeliculas.getMiCPeli().annadirUsuario(idPeli, idUsuario);
         }
     }
     
@@ -131,6 +135,16 @@ br = new BufferedReader(new FileReader(url.getPath()));*/
                 catPeliculas.annadirEtiqueta(idPeli,TF_IDF, etiqueta);
             }
         }
+    }
+    
+    private static void normalizarPesos() {
+    	CatalogoPeliculas catPeliculas = CatalogoPeliculas.getMiCPeli();
+    	for(Entry<Integer,Pelicula> peli: catPeliculas.getIdsYPeliculas()) {
+    		double norma= Operaciones.getOperacion().norma(peli.getValue().getEtiquetasYPesos());
+    		for( Entry<String,Float> pesos: peli.getValue().getEtiquetasYPesos() ){
+    			pesos.setValue((float) (pesos.getValue()/norma)); 			
+    		}
+    	}
     }
     
     private static void cargarFiltroContenido(){

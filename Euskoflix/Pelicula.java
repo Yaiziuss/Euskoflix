@@ -21,10 +21,12 @@ public class Pelicula{
     
     private final String nombre;
     private Map<String,Float> pesoEtiquetas;
+    private ArrayList<Integer> valoradaPorUsuarios;
 
     public Pelicula(String pNombre){
         this.nombre= pNombre;
         this.pesoEtiquetas= new HashMap<>();
+        this.valoradaPorUsuarios= new ArrayList<>();
     }
 
     public String getNombre() {return nombre;}
@@ -47,6 +49,14 @@ public class Pelicula{
         return lista;
     }
     
+    public void annadirUsuario(int idUsuario) {this.valoradaPorUsuarios.add(idUsuario);}
     
+    public String getListaUsuarios(){
+    	String usuarios="";
+    	for(Integer id: valoradaPorUsuarios) {
+    		usuarios+=String.valueOf(id)+",";
+    	}
+    	return usuarios.substring(0,usuarios.length()-1);
+    }
     
 }

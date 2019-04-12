@@ -57,6 +57,5 @@ public class FiltradoContenido extends Filtrado {
     	double coseno=Operaciones.getOperacion().cosenoVectorial(CatalogoPeliculas.getMiCPeli().getPelicula(idPelicula).getEtiquetasYPesos(), 
     			etiquetasUsuario(idUsuario), idUsuario);
     	return Math.abs(coseno);
-    	
     }
 }

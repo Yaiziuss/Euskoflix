@@ -58,6 +58,8 @@ public class CatalogoPeliculas{
      */
     public void annadirEtiqueta(int pIdPeli , float pNAparicionesE ,String pEtiqueta ){ this.listaPeliculas.get(pIdPeli).annadirEtiqueta(pEtiqueta, pNAparicionesE); }
     
+    public void annadirUsuario(int idPeli, int idUsuario) { this.listaPeliculas.get(idPeli).annadirUsuario(idUsuario);}
+    
     public int getTotalPelis(){ return this.listaPeliculas.size();}
     
     private Iterator<Entry<Integer,Pelicula>> getIterador(){return listaPeliculas.entrySet().iterator();}
