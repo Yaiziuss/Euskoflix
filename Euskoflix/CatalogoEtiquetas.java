@@ -46,6 +46,4 @@ public class CatalogoEtiquetas {
     }
     
     public int getApariciones(String pEtiqueta){ return (listaApariciones.get(pEtiqueta)==null)?0:listaApariciones.get(pEtiqueta);}
-    
-    private Iterator<Entry<String,Integer>> getIterador(){return listaApariciones.entrySet().iterator();}
 }

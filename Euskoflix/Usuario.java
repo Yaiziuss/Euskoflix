@@ -17,7 +17,7 @@ import java.util.Map.Entry;
  * @author Elalfred
  */
 public class Usuario{
-    private Map<Integer,Float> listaValoraciones;
+    private Map<Integer,Double> listaValoraciones;
     
 
     public Usuario(){
@@ -29,18 +29,18 @@ public class Usuario{
      * @param pIdPeli
      * @param pValoracion 
      */
-    public void annadirValoracion(int pIdPeli, float pValoracion){
+    public void annadirValoracion(int pIdPeli, double pValoracion){
         this.listaValoraciones.put(pIdPeli,pValoracion);
     }
 
     
-    public float getValoracion(int pClave){
+    public double getValoracion(int pClave){
         return (this.listaValoraciones.get(pClave)==null)?0:listaValoraciones.get(pClave); 
     }
     
-    public ArrayList<Entry<Integer,Float>> getPeliculaYValoracion(){
-        ArrayList<Entry<Integer,Float>> lista = new ArrayList<>();
-        for(Entry<Integer,Float> e: listaValoraciones.entrySet()){lista.add(e);}
+    public ArrayList<Entry<Integer,Double>> getPeliculaYValoracion(){
+        ArrayList<Entry<Integer,Double>> lista = new ArrayList<>();
+        for(Entry<Integer,Double> e: listaValoraciones.entrySet()){lista.add(e);}
         return lista;
     }
     

@@ -3,9 +3,7 @@ package Euskoflix;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.Map;
 import java.util.Map.Entry;
 
 /*
@@ -117,7 +115,7 @@ br = new BufferedReader(new FileReader(url.getPath()));*/
             String [] fields = linea.split(SEPARADOR2);
             int idPeli= Integer.parseInt(fields[1]);
             int idUsuario=Integer.parseInt(fields[0]);
-            catUsuarios.annadirValoracionAUsuario(idUsuario, idPeli, Float.parseFloat(fields[2]));
+            catUsuarios.annadirValoracionAUsuario(idUsuario, idPeli, Double.parseDouble(fields[2]));
             CatalogoPeliculas.getMiCPeli().annadirUsuario(idPeli, idUsuario);
         }
     }
@@ -130,7 +128,7 @@ br = new BufferedReader(new FileReader(url.getPath()));*/
         CatalogoEtiquetas catEtiquetas = CatalogoEtiquetas.getMiCEti();
         for( int idPeli : catPeliculas.getListaPeliculas()){
             for (String etiqueta: catPeliculas.getPelicula(idPeli).getNombresEtiquetas()){
-                float TF_IDF= catPeliculas.getPelicula(idPeli).getPesoEtiqueta(etiqueta);
+                double TF_IDF= catPeliculas.getPelicula(idPeli).getPesoEtiqueta(etiqueta);
                 TF_IDF*=Math.log(catPeliculas.getTotalPelis()/catEtiquetas.getApariciones(etiqueta));
                 catPeliculas.annadirEtiqueta(idPeli,TF_IDF, etiqueta);
             }
@@ -140,17 +138,20 @@ br = new BufferedReader(new FileReader(url.getPath()));*/
     private static void normalizarPesos() {
     	CatalogoPeliculas catPeliculas = CatalogoPeliculas.getMiCPeli();
     	for(Entry<Integer,Pelicula> peli: catPeliculas.getIdsYPeliculas()) {
-    		double norma= Operaciones.getOperacion().norma(peli.getValue().getEtiquetasYPesos());
-    		for( Entry<String,Float> pesos: peli.getValue().getEtiquetasYPesos() ){
-    			pesos.setValue((float) (pesos.getValue()/norma)); 			
-    		}
+            double norma= CatalogoPeliculas.getMiCPeli().norma(peli.getKey());
+            for( Entry<String,Double> pesos: peli.getValue().getEtiquetasYPesos() ){
+                pesos.setValue( (pesos.getValue()/norma)); 			
+            }
     	}
     }
     
+ 
     private static void cargarFiltroContenido(){
-        ArrayList<Entry<Integer,ArrayList<Entry<Integer,Float>>>> listaEntriesUsuario = CatalogoUsuarios.getMiCU().listaEntriesDeUsuarios();
-        for(Entry<Integer,ArrayList<Entry<Integer,Float>>> listaEntriesU : listaEntriesUsuario){
-            FiltradoContenido.getMiFiltro().annadirModeloPersona(listaEntriesU.getKey(), listaEntriesU.getValue());
-        }
+        CatalogoUsuarios.getMiCU().listaEntriesDeUsuarios().stream().forEach((listaEntriesUsuario) -> {
+            FiltradoContenido.getMiFiltro().annadirModeloPersona(listaEntriesUsuario.getKey(), listaEntriesUsuario.getValue());
+        });
     }
+    
+   
+       
 }

@@ -6,23 +6,17 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 import java.util.Map.Entry; 
-import java.util.Iterator;
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 
 /**
  *
  * @author Elalfred
  */
-public class CatalogoPeliculas{  
+public class CatalogoPeliculas {  
     private Map<Integer,Pelicula> listaPeliculas;
     private static CatalogoPeliculas miCPeli = new CatalogoPeliculas();
     
     private CatalogoPeliculas(){  this.listaPeliculas=new HashMap<>(); }
-    
     /**
      * 
      * @return 
@@ -30,7 +24,6 @@ public class CatalogoPeliculas{
     public static CatalogoPeliculas getMiCPeli(){ return miCPeli;}
     
     
-    //encapsular
     public Set<Integer> getListaPeliculas() {return listaPeliculas.keySet(); }
     
     public ArrayList<Entry<Integer,Pelicula>> getIdsYPeliculas(){
@@ -56,15 +49,18 @@ public class CatalogoPeliculas{
      * @param pEtiqueta 
      * @precondicion la pelicula tiene que existir
      */
-    public void annadirEtiqueta(int pIdPeli , float pNAparicionesE ,String pEtiqueta ){ this.listaPeliculas.get(pIdPeli).annadirEtiqueta(pEtiqueta, pNAparicionesE); }
+    public void annadirEtiqueta(int pIdPeli , double pNAparicionesE ,String pEtiqueta ){ this.listaPeliculas.get(pIdPeli).annadirEtiqueta(pEtiqueta, pNAparicionesE); }
     
     public void annadirUsuario(int idPeli, int idUsuario) { this.listaPeliculas.get(idPeli).annadirUsuario(idUsuario);}
     
     public int getTotalPelis(){ return this.listaPeliculas.size();}
     
-    private Iterator<Entry<Integer,Pelicula>> getIterador(){return listaPeliculas.entrySet().iterator();}
-
-    
-    
+    public double norma(int idPelicula){
+        double norma=0;
+        norma = listaPeliculas.get(idPelicula).getEtiquetasYPesos().stream()
+                .map((par) -> Math.pow(par.getValue(),2))
+                .reduce(norma, (accumulator, _item) -> accumulator + _item);
+        return Math.sqrt(norma);
+    }
 
 }

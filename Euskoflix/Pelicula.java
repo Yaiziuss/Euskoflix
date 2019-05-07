@@ -20,7 +20,7 @@ import java.util.Set;
 public class Pelicula{
     
     private final String nombre;
-    private Map<String,Float> pesoEtiquetas;
+    private Map<String,Double> pesoEtiquetas;
     private ArrayList<Integer> valoradaPorUsuarios;
 
     public Pelicula(String pNombre){
@@ -31,7 +31,7 @@ public class Pelicula{
 
     public String getNombre() {return nombre;}
     
-    public void annadirEtiqueta(String pEtiqueta, float pNApariciones){
+    public void annadirEtiqueta(String pEtiqueta, double pNApariciones){
         if(!this.pesoEtiquetas.containsKey(pEtiqueta)){ 
             this.pesoEtiquetas.put(pEtiqueta,pNApariciones);
         }else{
@@ -39,13 +39,13 @@ public class Pelicula{
         }
     }
     
-    public float getPesoEtiqueta(String pEtiqueta){ return (this.pesoEtiquetas.get(pEtiqueta)==null)?0:pesoEtiquetas.get(pEtiqueta);}
+    public double getPesoEtiqueta(String pEtiqueta){ return (this.pesoEtiquetas.get(pEtiqueta)==null)?0:pesoEtiquetas.get(pEtiqueta);}
 
     public Set<String> getNombresEtiquetas() { return pesoEtiquetas.keySet(); }
     
-    public ArrayList<Entry<String,Float>> getEtiquetasYPesos(){
-        ArrayList<Entry<String,Float>> lista = new ArrayList<>();
-        for(Entry<String,Float> e: pesoEtiquetas.entrySet()){lista.add(e);}
+    public ArrayList<Entry<String,Double>> getEtiquetasYPesos(){
+        ArrayList<Entry<String,Double>> lista = new ArrayList<>();
+        for(Entry<String,Double> e: pesoEtiquetas.entrySet()){lista.add(e);}
         return lista;
     }
     
@@ -54,7 +54,7 @@ public class Pelicula{
     public String getListaUsuarios(){
     	String usuarios="";
     	for(Integer id: valoradaPorUsuarios) {
-    		usuarios+=String.valueOf(id)+",";
+    		usuarios+=String.valueOf(id)+"/";
     	}
     	return usuarios.substring(0,usuarios.length()-1);
     }
