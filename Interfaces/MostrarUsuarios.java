@@ -73,7 +73,7 @@ public class MostrarUsuarios extends JDialog {
 			scrollPane.setViewportView(table);
 			DefaultTableModel modelotabla;
 			JTable tabla1;			
-			ArrayList<Entry<Integer,ArrayList<Entry<Integer,Float>>>> listaEntriesUsuarios = CatalogoUsuarios.getMiCU().listaEntriesDeUsuarios();
+			ArrayList<Entry<Integer, ArrayList<Entry<Integer, Double>>>> listaEntriesUsuarios = CatalogoUsuarios.getMiCU().listaEntriesDeUsuarios();
 			Object columnas[] = {"Id Usuario","Pelicula","Valoración"};
 
                         modelotabla = new DefaultTableModel(columnas,0); //0 son las filas
@@ -82,9 +82,9 @@ public class MostrarUsuarios extends JDialog {
                         tabla1.setEnabled(false);
                         getContentPane().add(tabla1);
                         //for para separar el id de la valoracion de la peli y del id de esta
-                        for(Entry<Integer,ArrayList<Entry<Integer,Float>>> entriesUsuario : listaEntriesUsuarios){
+                        for(Entry<Integer, ArrayList<Entry<Integer, Double>>> entriesUsuario : listaEntriesUsuarios){
                             int idUsuario=entriesUsuario.getKey();
-                            for(Entry<Integer,Float> par : entriesUsuario.getValue()) {
+                            for(Entry<Integer, Double> par : entriesUsuario.getValue()) {
                                 modelotabla.addRow(new Object[] {idUsuario,CatalogoPeliculas.getMiCPeli().getPelicula(par.getKey()).getNombre(),par.getValue()});
                             }
                         }

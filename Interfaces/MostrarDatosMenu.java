@@ -96,11 +96,31 @@ public class MostrarDatosMenu extends javax.swing.JFrame {
 					int seleccion = JOptionPane.showOptionDialog(null, "Seleccione una opción", "Catalogo de modelos", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[3]);
 					if(seleccion==0) {
 						PuntuacionContenido pc= new PuntuacionContenido();
+						
+						pc.setOp(0);
+						
 						pc.setVisible(true);
+						
 					} else if (seleccion==1 || seleccion==2) {
 						JOptionPane.showMessageDialog(null,"Opción en mantenimiento. Sentimos las molestias");
 					} else {
 						
+					}
+				} else if (index == 5){ 
+					String[] options = {"Contenido", "Usuarios", "Peliculas", "Menu principal"};
+					int sel = JOptionPane.showOptionDialog(null, "Seleccione una opción", "Catalogo de modelos de recomendación", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[3]);
+					if(sel==0) {
+						System.out.println("0");
+						RecomendarPeli rp= new RecomendarPeli();
+						System.out.println("1");
+						rp.setOp(0);
+						System.out.println("2");
+						rp.setVisible(true);
+						System.out.println("3");
+					} else if(sel==1) {
+						RecomendarPeli rp= new RecomendarPeli();
+						rp.setOp(1);
+						rp.setVisible(true);
 					}
 				}
 			}
@@ -129,6 +149,7 @@ public class MostrarDatosMenu extends javax.swing.JFrame {
 		cboxVer.addItem("Ver valoraciones cargadas");
 		cboxVer.addItem("Ver usuarios cargados");
 		cboxVer.addItem("¿Qué puntuación le daría?");
+		cboxVer.addItem("¡Recomiendame unas películas!");
 	}
 
 }

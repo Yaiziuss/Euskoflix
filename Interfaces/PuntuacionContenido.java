@@ -37,9 +37,15 @@ import javax.swing.SwingConstants;
 public class PuntuacionContenido extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
+	private int op;
 	/**
 	 * Launch the application.
 	 */
+	public int setOp(int pNum) {
+		op=pNum;
+		return  op;		
+	}
+	
 	public static void main(String[] args) {
 		try {
 			PuntuacionContenido dialog = new PuntuacionContenido();
@@ -127,6 +133,7 @@ public class PuntuacionContenido extends JDialog {
 					// TODO Auto-generated method stub
 					int idU = Integer.valueOf(textAreaUsu.getText());
 					int idP = Integer.valueOf(textAreaPeli.getText());
+				//	int filtrado= FiltradoContenido.getMiFiltro().getId();
 					Pelicula peli = CatalogoPeliculas.getMiCPeli().getPelicula(idP);
 					if(CatalogoUsuarios.getMiCU().getUsuario(idU)==null){ //Si el usuario no existe
 						JOptionPane.showMessageDialog(null,"No existe el usuario introducido");
@@ -136,13 +143,14 @@ public class PuntuacionContenido extends JDialog {
 						//si el usuario existe y tiene la película valorada, sacar la valoración
 						//si el usuario existe pero no tiene la película valorada, calcular la valoración
 						Usuario usu = CatalogoUsuarios.getMiCU().getUsuario(idU);
-						float valor = usu.getValoracion(idP);
+						double valor = usu.getValoracion(idP);
 						if(valor != 0){
 							//mostramos la valoración directamente sin modificar la variable valor
 							JOptionPane.showMessageDialog(null,"El usuario con ID "+idU+" ha valorado la película en "+valor+" puntos");
 						}else{
 							//calculamos la valoración
-							double notaCalculada = FiltradoContenido.getMiFiltro().calcularNotaUsuario(idU, idP);
+						//	if (filtrado==0)
+							double notaCalculada = FiltradoContenido.getMiFiltro().calcularNota(idU, idP);
 							BigDecimal resul = new BigDecimal(notaCalculada);
 							resul = resul.setScale(4, RoundingMode.DOWN);
 							JOptionPane.showMessageDialog(null,"El usuario con ID "+idU+" valoraría la película en "+resul+" puntos");
