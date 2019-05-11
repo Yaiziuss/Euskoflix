@@ -43,11 +43,6 @@ public class MostrarDatosMenu extends javax.swing.JFrame {
 			public void run() {
 				try {
 					CargadorDatos.cargarDatos();
-					//1/280
-					
-				/*	System.out.println(FiltradoContenido.getMiFiltro().calcularNotaUsuario(4043, 807));
-					System.out.println(FiltradoContenido.getMiFiltro().calcularNotaUsuario(4043, 187));
-					System.out.println(FiltradoContenido.getMiFiltro().calcularNotaUsuario(4043, 11));  */
 					MostrarDatosMenu window = new MostrarDatosMenu();
 					window.frmCargaDeDatos.setVisible(true);
 				} catch (Exception e) {
@@ -93,34 +88,17 @@ public class MostrarDatosMenu extends javax.swing.JFrame {
 					ve.setVisible(true);
 				} else if (index == 4) {
 					String[] options = {"Contenido", "Usuarios", "Peliculas", "Menu principal"};
-					int seleccion = JOptionPane.showOptionDialog(null, "Seleccione una opción", "Catalogo de modelos", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[3]);
-					if(seleccion==0) {
-						PuntuacionContenido pc= new PuntuacionContenido();
-						
-						pc.setOp(0);
-						
-						pc.setVisible(true);
-						
-					} else if (seleccion==1 || seleccion==2) {
+					int sel = JOptionPane.showOptionDialog(null, "Seleccione una opción", "Catalogo de modelos de recomendación", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[3]);
+					if(sel==0) {
+						RecomendarPeliC rp= new RecomendarPeliC();
+						rp.setVisible(true);
+					} else if(sel==1) {
+						RecomendarPeliU rp= new RecomendarPeliU();
+						rp.setVisible(true);
+					} else if (sel==2) {
 						JOptionPane.showMessageDialog(null,"Opción en mantenimiento. Sentimos las molestias");
 					} else {
 						
-					}
-				} else if (index == 5){ 
-					String[] options = {"Contenido", "Usuarios", "Peliculas", "Menu principal"};
-					int sel = JOptionPane.showOptionDialog(null, "Seleccione una opción", "Catalogo de modelos de recomendación", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[3]);
-					if(sel==0) {
-						System.out.println("0");
-						RecomendarPeli rp= new RecomendarPeli();
-						System.out.println("1");
-						rp.setOp(0);
-						System.out.println("2");
-						rp.setVisible(true);
-						System.out.println("3");
-					} else if(sel==1) {
-						RecomendarPeli rp= new RecomendarPeli();
-						rp.setOp(1);
-						rp.setVisible(true);
 					}
 				}
 			}
@@ -148,7 +126,6 @@ public class MostrarDatosMenu extends javax.swing.JFrame {
 		cboxVer.addItem("Ver peliculas cargadas");
 		cboxVer.addItem("Ver valoraciones cargadas");
 		cboxVer.addItem("Ver usuarios cargados");
-		cboxVer.addItem("¿Qué puntuación le daría?");
 		cboxVer.addItem("¡Recomiendame unas películas!");
 	}
 
