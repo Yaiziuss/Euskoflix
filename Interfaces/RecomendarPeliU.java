@@ -27,13 +27,14 @@ import javax.swing.table.DefaultTableModel;
 import java.util.ArrayList;
 
 import Euskoflix.*;
+import javax.swing.JTextField;
 
 
 public class RecomendarPeliU extends JDialog {
 	private final JPanel contentPanel = new JPanel();
 	private JLabel txtPorFavorIntroduzca;
-	private JTextArea txtrIdusuario;
 	private JTable table;
+	private JTextField txtrIdusuario;
 
 	/**
 	 * Launch the application.
@@ -57,28 +58,29 @@ public class RecomendarPeliU extends JDialog {
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		{
-			JPanel buttonPane = new JPanel();
-			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
-			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 			}
 		}
 		contentPanel.setLayout(null);
 		JLabel lblEuskoflix = new JLabel("EUSKOFLIX");
-		lblEuskoflix.setBounds(5, 0, 440, 36);
+		lblEuskoflix.setBounds(141, 10, 167, 36);
 		lblEuskoflix.setHorizontalAlignment(SwingConstants.CENTER);
 		lblEuskoflix.setForeground(Color.RED);
 		lblEuskoflix.setFont(new Font("Lucida Grande", Font.BOLD, 30));
 		contentPanel.add(lblEuskoflix);
 		contentPanel.add(getTxtPorFavorIntroduzca());
-		contentPanel.add(getTxtrIdusuario());
+		{
+			txtrIdusuario = new JTextField();
+			txtrIdusuario.setBounds(97, 94, 130, 26);
+			contentPanel.add(txtrIdusuario);
+			txtrIdusuario.setColumns(10);
+		}
 		{
 			JButton okButton = new JButton("Recomendar");
-			okButton.setBounds(149, 92, 122, 25);
+			okButton.setBounds(232, 93, 121, 29);
 			contentPanel.add(okButton);
 			okButton.setActionCommand("Recomendar");
 			getRootPane().setDefaultButton(okButton);
-			contentPanel.add(getTabbedPane());
 			okButton.addActionListener(new ActionListener(){ 
 				@Override
 				public void actionPerformed(ActionEvent e) {
@@ -87,6 +89,15 @@ public class RecomendarPeliU extends JDialog {
 					rellenarTabla(table);
 				}
 			});
+		}
+		{
+			JPanel tablePanel = new JPanel();
+			getContentPane().add(tablePanel, BorderLayout.SOUTH);
+			{
+				JScrollPane scrollPane = new JScrollPane();
+				tablePanel.add(scrollPane);
+			}
+			tablePanel.add(getTabbedPane());
 		}
 	}
 	private void rellenarTabla(JTable table) {
@@ -119,6 +130,7 @@ public class RecomendarPeliU extends JDialog {
 			    getContentPane().add(tabla1);
                 for(String puntuTitu: recom){
                 	String[] par= puntuTitu.split("//");
+                	par[1] = par[1].substring(0,par[1].length()-1);//quitamos comilla del final
                 	modelotabla.addRow(new Object[] {par[0],par[1]});
 			        }
 			    JScrollPane scroll11 = new JScrollPane(tabla1);
@@ -130,7 +142,7 @@ public class RecomendarPeliU extends JDialog {
 	private JLabel getTxtPorFavorIntroduzca() {
 		if (txtPorFavorIntroduzca == null) {
 			txtPorFavorIntroduzca = new JLabel();
-			txtPorFavorIntroduzca.setBounds(5, 48, 346, 32);
+			txtPorFavorIntroduzca.setBounds(58, 51, 333, 37);
 			txtPorFavorIntroduzca.setText("Por favor, introduzca su número de usuario");
 			txtPorFavorIntroduzca.setVerticalAlignment(SwingConstants.TOP);
 			txtPorFavorIntroduzca.setHorizontalAlignment(SwingConstants.CENTER);
@@ -146,33 +158,9 @@ public class RecomendarPeliU extends JDialog {
 		}
 		return txtPorFavorIntroduzca;
 	}
-	private JTextArea getTxtrIdusuario() {
-		if (txtrIdusuario == null) {
-			txtrIdusuario = new JTextArea();
-			txtrIdusuario.setBounds(365, 48, 80, 30);
-			txtrIdusuario.setText("");
-			txtrIdusuario.addKeyListener(new KeyAdapter()
-			{
-			   public void keyTyped(KeyEvent e)
-			   {
-			      char caracter = e.getKeyChar();
-
-			      // Verificar si la tecla pulsada no es un digito
-			      if(!(((caracter < '0') ||
-			         (caracter > '9')) &&
-			         (caracter != '\b' /*corresponde a BACK_SPACE*/)))
-			      {
-			         //no hacer nada
-			      }else{e.consume();}// ignorar el evento de teclado
-			   }
-			});
-		}
-		return txtrIdusuario;
-	}
 	private JTable getTabbedPane() {
 		if (table == null) {
 			table = new JTable();
-			table.setBounds(12, 146, 415, 77);
 		}
 		return table;
 	}

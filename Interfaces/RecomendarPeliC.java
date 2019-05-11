@@ -24,9 +24,6 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
-import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.forms.layout.ColumnSpec;
-import com.jgoodies.forms.layout.RowSpec;
 
 import Euskoflix.*;
 
@@ -40,9 +37,9 @@ import javax.swing.JTabbedPane;
 public class RecomendarPeliC extends JDialog {
 	private final JPanel contentPanel = new JPanel();
 	private JLabel txtPorFavorIntroduzca;
-	private JTextArea txtrIdusuario;
 	private JTabbedPane tabbedPane;
 	private JTable table;
+	private JTextField txtrIdusuario;
 
 	/**
 	 * Launch the application.
@@ -62,13 +59,11 @@ public class RecomendarPeliC extends JDialog {
 	 */
 	public RecomendarPeliC() {
 		setBounds(100, 100, 450, 300);
-		getContentPane().setLayout(new BorderLayout());
+		getContentPane().setLayout(new GridLayout(0, 1, 0, 0));
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
-		getContentPane().add(contentPanel, BorderLayout.CENTER);
+		setLocationRelativeTo(null);
+		getContentPane().add(contentPanel);
 		{
-			JPanel buttonPane = new JPanel();
-			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
-			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				
 		}
@@ -80,14 +75,24 @@ public class RecomendarPeliC extends JDialog {
 		lblEuskoflix.setFont(new Font("Lucida Grande", Font.BOLD, 30));
 		contentPanel.add(lblEuskoflix);
 		contentPanel.add(getTxtPorFavorIntroduzca());
-		contentPanel.add(getTxtrIdusuario());
 		{
 			JButton okButton = new JButton("Recomendar");
-			okButton.setBounds(149, 92, 122, 25);
+			okButton.setBounds(239, 92, 122, 25);
 			contentPanel.add(okButton);
 			okButton.setActionCommand("Recomendar");
 			getRootPane().setDefaultButton(okButton);
-			contentPanel.add(getTabbedPane());
+			
+			txtrIdusuario = new JTextField();
+			txtrIdusuario.setBounds(64, 90, 130, 26);
+			contentPanel.add(txtrIdusuario);
+			txtrIdusuario.setColumns(10);
+			
+			JPanel tablePanel = new JPanel();
+			getContentPane().add(tablePanel);
+			
+			JScrollPane scrollPane = new JScrollPane();
+			tablePanel.add(scrollPane);
+			tablePanel.add(getTabbedPane());
 			okButton.addActionListener(new ActionListener(){ 
 				@Override
 				public void actionPerformed(ActionEvent e) {
@@ -129,6 +134,7 @@ public class RecomendarPeliC extends JDialog {
 			    getContentPane().add(tabla1);
                 for(String puntuTitu: recom){
                 	String[] par= puntuTitu.split("//");
+                	par[1] = par[1].substring(0,par[1].length()-1);//quitamos comilla del final
                 	modelotabla.addRow(new Object[] {par[0],par[1]});
 			        }
 			    JScrollPane scroll11 = new JScrollPane(tabla1);
@@ -140,7 +146,7 @@ public class RecomendarPeliC extends JDialog {
 	private JLabel getTxtPorFavorIntroduzca() {
 		if (txtPorFavorIntroduzca == null) {
 			txtPorFavorIntroduzca = new JLabel();
-			txtPorFavorIntroduzca.setBounds(5, 48, 346, 32);
+			txtPorFavorIntroduzca.setBounds(37, 48, 346, 32);
 			txtPorFavorIntroduzca.setText("Por favor, introduzca su número de usuario");
 			txtPorFavorIntroduzca.setVerticalAlignment(SwingConstants.TOP);
 			txtPorFavorIntroduzca.setHorizontalAlignment(SwingConstants.CENTER);
@@ -156,33 +162,9 @@ public class RecomendarPeliC extends JDialog {
 		}
 		return txtPorFavorIntroduzca;
 	}
-	private JTextArea getTxtrIdusuario() {
-		if (txtrIdusuario == null) {
-			txtrIdusuario = new JTextArea();
-			txtrIdusuario.setBounds(365, 48, 80, 30);
-			txtrIdusuario.setText("");
-			txtrIdusuario.addKeyListener(new KeyAdapter()
-			{
-			   public void keyTyped(KeyEvent e)
-			   {
-			      char caracter = e.getKeyChar();
-
-			      // Verificar si la tecla pulsada no es un digito
-			      if(!(((caracter < '0') ||
-			         (caracter > '9')) &&
-			         (caracter != '\b' /*corresponde a BACK_SPACE*/)))
-			      {
-			         //no hacer nada
-			      }else{e.consume();}// ignorar el evento de teclado
-			   }
-			});
-		}
-		return txtrIdusuario;
-	}
 	private JTable getTabbedPane() {
 		if (table == null) {
 			table = new JTable();
-			table.setBounds(12, 146, 415, 77);
 		}
 		return table;
 	}

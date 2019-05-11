@@ -9,8 +9,10 @@ import javax.swing.JOptionPane;
 
 import java.awt.BorderLayout;
 import javax.swing.JTable;
+import javax.swing.JWindow;
 import javax.swing.JPanel;
 import java.awt.GridLayout;
+import java.awt.SplashScreen;
 import java.awt.Toolkit;
 
 import javax.swing.JButton;
@@ -39,17 +41,16 @@ public class MostrarDatosMenu extends javax.swing.JFrame {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
+		/*EventQueue.invokeLater(new Runnable() {
 			public void run() {
-				try {
-					CargadorDatos.cargarDatos();
+				try {			
 					MostrarDatosMenu window = new MostrarDatosMenu();
 					window.frmCargaDeDatos.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
-		});
+		});*/
 	}
 
 	/**
@@ -67,7 +68,6 @@ public class MostrarDatosMenu extends javax.swing.JFrame {
 		frmCargaDeDatos.setTitle("Carga de datos");
 		frmCargaDeDatos.setBounds(100, 100, 450, 300);
 		frmCargaDeDatos.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
 		panel = new JPanel();
 		frmCargaDeDatos.getContentPane().add(panel, BorderLayout.SOUTH);
 		panel.setLayout(new GridLayout(1, 2, 0, 0));
@@ -76,7 +76,7 @@ public class MostrarDatosMenu extends javax.swing.JFrame {
 				//obtenemos la opción del combobox
 				int index = cboxVer.getSelectedIndex();
 				//
-				if(index== 0){JOptionPane.showMessageDialog(null,"Selecciona otra opción, por favor");
+				if(index== 0){JOptionPane.showMessageDialog(null,"Seleccione una opción, por favor");
 			} else if(index == 1){ 
 					MostrarPeliculas ventana = new MostrarPeliculas();
 					ventana.setVisible(true);
@@ -127,6 +127,8 @@ public class MostrarDatosMenu extends javax.swing.JFrame {
 		cboxVer.addItem("Ver valoraciones cargadas");
 		cboxVer.addItem("Ver usuarios cargados");
 		cboxVer.addItem("¡Recomiendame unas películas!");
+		setLocationRelativeTo(null);
+		frmCargaDeDatos.setVisible(true);
 	}
 
 }
