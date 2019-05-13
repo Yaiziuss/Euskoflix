@@ -91,16 +91,22 @@ public class RecomendarPeliC extends JDialog {
 						    	  e.consume();
 						      }
 						   }
-				});
+					});
 				}
 				{
 					JButton recomendarButton = new JButton("Recomendar");
 					panel.add(recomendarButton);
 					recomendarButton.setActionCommand("Recomendar");
 					getRootPane().setDefaultButton(recomendarButton);
+					
+					JButton btnVolver = new JButton("Volver");
+					panel.add(btnVolver);
+					btnVolver.setActionCommand("Volver");
+					btnVolver.setVisible(false);
+					getRootPane().setDefaultButton(btnVolver);
+					btnVolver.setVisible(false);
+					
 					{
-						JButton btnVolver = new JButton("Volver");
-						//btnVolver.setVisible(false);
 						btnVolver.addActionListener(new ActionListener() {
 							public void actionPerformed(ActionEvent e) {
 								setVisible(false);
@@ -119,6 +125,7 @@ public class RecomendarPeliC extends JDialog {
 						public void actionPerformed(ActionEvent e) {
 							table=getTabbedPane();
 							recomendarButton.setVisible(false);
+							btnVolver.setVisible(true);
 							rellenarTabla(table);
 						}
 					});
@@ -174,7 +181,6 @@ public class RecomendarPeliC extends JDialog {
 			Border border = txtPorFavorIntroduzca.getBorder();
 			Border margin = new EmptyBorder(10,10,10,10);
 			txtPorFavorIntroduzca.setBorder(new CompoundBorder(border, margin));
-		//	txtPorFavorIntroduzca.setColumns(10);
 		}
 		return txtPorFavorIntroduzca;
 	}

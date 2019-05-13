@@ -85,13 +85,20 @@ public class RecomendarPeliU extends JDialog {
 					    	  e.consume();
 					      }
 					   }
-			});
+				});
 			}
 			{
 				JButton recomendarButton = new JButton("Recomendar");
 				panel.add(recomendarButton);
 				recomendarButton.setActionCommand("Recomendar");
 				getRootPane().setDefaultButton(recomendarButton);
+				
+				JButton btnVolver = new JButton("Volver");
+				panel.add(btnVolver);
+				btnVolver.setActionCommand("Volver");
+				btnVolver.setVisible(false);
+				getRootPane().setDefaultButton(btnVolver);
+				btnVolver.setVisible(false);
 				{
 					JButton btnVolver = new JButton("Volver");
 					//btnVolver.setVisible(false);
@@ -113,7 +120,8 @@ public class RecomendarPeliU extends JDialog {
 					public void actionPerformed(ActionEvent e) {
 						tabla1=getTabbedPane();
 						recomendarButton.setVisible(false);
-						rellenarTabla(tabla1);
+						btnVolver.setVisible(true);
+						rellenarTabla(tabla1);					
 					}
 				});
 			}
