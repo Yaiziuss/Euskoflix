@@ -98,10 +98,8 @@ public class RecomendarPeliU extends JDialog {
 				btnVolver.setActionCommand("Volver");
 				btnVolver.setVisible(false);
 				getRootPane().setDefaultButton(btnVolver);
-				btnVolver.setVisible(false);
+				
 				{
-					JButton btnVolver = new JButton("Volver");
-					//btnVolver.setVisible(false);
 					btnVolver.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent e) {
 							setVisible(false);
@@ -121,7 +119,7 @@ public class RecomendarPeliU extends JDialog {
 						tabla1=getTabbedPane();
 						recomendarButton.setVisible(false);
 						btnVolver.setVisible(true);
-						rellenarTabla(tabla1);					
+						rellenarTabla(tabla1);
 					}
 				});
 			}
@@ -133,7 +131,6 @@ public class RecomendarPeliU extends JDialog {
 	}
 	private void rellenarTabla(JTable table) {
 		JScrollPane scrollPane = new JScrollPane();
-		//getContentPane().add(scrollPane);
 		{
 			ArrayList<String> recom= new ArrayList<>();
 			int usu=Integer.parseInt(txtrIdusuario.getText());
@@ -176,7 +173,6 @@ public class RecomendarPeliU extends JDialog {
 			Border border = txtPorFavorIntroduzca.getBorder();
 			Border margin = new EmptyBorder(10,10,10,10);
 			txtPorFavorIntroduzca.setBorder(new CompoundBorder(border, margin));
-		//	txtPorFavorIntroduzca.setColumns(10);
 		}
 		return txtPorFavorIntroduzca;
 	}
