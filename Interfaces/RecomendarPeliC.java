@@ -18,6 +18,8 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
 
@@ -72,6 +74,24 @@ public class RecomendarPeliC extends JDialog {
 					txtrIdusuario = new JTextField();
 					panel.add(txtrIdusuario);
 					txtrIdusuario.setColumns(10);
+					txtrIdusuario.addKeyListener(new KeyAdapter()
+					{
+						   public void keyTyped(KeyEvent e)
+						   {
+						      char caracter = e.getKeyChar();
+
+						      // Verificar si la tecla pulsada no es un digito
+						      if(!(((caracter < '0') ||
+						         (caracter > '9')) &&
+						         (caracter != '\b' /*corresponde a BACK_SPACE*/)))
+						      {
+						    	  //no hacer nada
+						      }else{
+						    	// ignorar el evento de teclado
+						    	  e.consume();
+						      }
+						   }
+				});
 				}
 				{
 					JButton recomendarButton = new JButton("Recomendar");
