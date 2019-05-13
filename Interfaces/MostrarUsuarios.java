@@ -1,7 +1,6 @@
 package Interfaces;
 
 import java.awt.BorderLayout;
-import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,16 +12,18 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
 import Euskoflix.*;
 import java.util.Map.Entry;
-import javax.swing.SwingConstants;
 
 public class MostrarUsuarios extends JDialog {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6112940335477447658L;
 	private final JPanel contentPanel = new JPanel();
 
 	/**
@@ -43,7 +44,16 @@ public class MostrarUsuarios extends JDialog {
 	 */
 	public MostrarUsuarios() {
 		setBounds(100, 100, 450, 300);
+		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
+		{
+			JPanel panel = new JPanel();
+			getContentPane().add(panel, BorderLayout.NORTH);
+			{
+				JLabel tituloUsuCarg = new JLabel("Usuarios cargados y sus valoraciones");
+				panel.add(tituloUsuCarg);
+			}
+		}
 		{
 			JPanel panel = new JPanel();
 			getContentPane().add(panel, BorderLayout.SOUTH);
@@ -60,10 +70,6 @@ public class MostrarUsuarios extends JDialog {
 		contentPanel.setLayout(new FlowLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
-		{
-			JLabel tituloUsuCarg = new JLabel("Usuarios cargados");
-			contentPanel.add(tituloUsuCarg);
-		}
 		{
 			JScrollPane scrollPane = new JScrollPane();
 			contentPanel.add(scrollPane);
@@ -84,7 +90,7 @@ public class MostrarUsuarios extends JDialog {
                         //for para separar el id de la valoracion de la peli y del id de esta
                         for(Entry<Integer, ArrayList<Entry<Integer, Double>>> entriesUsuario : listaEntriesUsuarios){
                             int idUsuario=entriesUsuario.getKey();
-                            for(Entry<Integer, Double> par : entriesUsuario.getValue()) {
+                            for(Entry<Integer, Double> par : entriesUsuario.getValue()) {   	
                                 modelotabla.addRow(new Object[] {idUsuario,CatalogoPeliculas.getMiCPeli().getPelicula(par.getKey()).getNombre(),par.getValue()});
                             }
                         }

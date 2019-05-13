@@ -3,27 +3,28 @@ package Interfaces;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.util.ArrayList;
-
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
-
 import Euskoflix.*;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import java.util.Map;
 import java.util.Map.Entry;
+import javax.swing.SwingConstants;
 
 public class MostrarEtiquetas extends JDialog {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -138878762775141998L;
 	private final JPanel contentPanel = new JPanel();
-	private JTable table;
+	//private JTable table;
 
 	/**
 	 * Launch the application.
@@ -43,7 +44,18 @@ public class MostrarEtiquetas extends JDialog {
 	 */
 	public MostrarEtiquetas() {
 		setBounds(100, 100, 500, 500);
+		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
+		{
+			JPanel panel = new JPanel();
+			getContentPane().add(panel, BorderLayout.NORTH);
+			panel.setLayout(new BorderLayout(0, 0));
+		}
+		{
+			JLabel tituloEtiCarg = new JLabel("Etiquetas cargadas");
+			tituloEtiCarg.setHorizontalAlignment(SwingConstants.CENTER);
+			getContentPane().add(tituloEtiCarg, BorderLayout.NORTH);
+		}
 		{
 			JPanel panel = new JPanel();
 			getContentPane().add(panel, BorderLayout.SOUTH);
@@ -60,10 +72,6 @@ public class MostrarEtiquetas extends JDialog {
 		contentPanel.setLayout(new FlowLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
-		{
-			JLabel tituloEtiCarg = new JLabel("Etiquetas cargadas");
-			contentPanel.add(tituloEtiCarg);
-		}
 		{
 			JScrollPane scrollPane = new JScrollPane();
 			contentPanel.add(scrollPane);

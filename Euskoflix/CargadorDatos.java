@@ -72,7 +72,7 @@ br = new BufferedReader(new FileReader(url.getPath()));*/
         ArrayList<String> listaPeliculas = getLineasFichero(RUTA_F_PELICULAS);
         for(String linea : listaPeliculas){
             String [] fields = linea.split(SEPARADOR1);
-            catPeliculas.annadirPelicula((Integer.parseInt(fields[0])),fields[1].substring(1, fields[1].length()));
+            catPeliculas.annadirPelicula((Integer.parseInt(fields[0])),fields[1].substring(1, fields[1].length()-1));
         }
     }
     

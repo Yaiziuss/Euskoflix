@@ -1,41 +1,32 @@
 package Interfaces;
-import Euskoflix.*;
-
-import java.awt.EventQueue;
 
 import javax.swing.JFrame;
-import javax.swing.JList;
 import javax.swing.JOptionPane;
 
 import java.awt.BorderLayout;
-import javax.swing.JTable;
-import javax.swing.JWindow;
 import javax.swing.JPanel;
 import java.awt.GridLayout;
-import java.awt.SplashScreen;
-import java.awt.Toolkit;
-
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
-
-
 import javax.swing.JComboBox;
 import java.awt.Font;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.event.ActionListener;
-import java.util.Map;
 import java.awt.event.ActionEvent;
 
 public class MostrarDatosMenu extends javax.swing.JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JFrame frmCargaDeDatos;
 	private JPanel panel;
 	private final JButton btnOk = new JButton("OK");
 	private JButton btnSalir;
 	private JLabel lblEuskoflix;
-	private JComboBox cboxVer;
+	private JComboBox<String> cboxVer;
 
 	/**
 	 * Launch the application.
@@ -65,8 +56,9 @@ public class MostrarDatosMenu extends javax.swing.JFrame {
 	 */
 	private void initialize() {
 		frmCargaDeDatos = new JFrame();
-		frmCargaDeDatos.setTitle("Carga de datos");
+		frmCargaDeDatos.setTitle("Menú Principal");
 		frmCargaDeDatos.setBounds(100, 100, 450, 300);
+		frmCargaDeDatos.setLocationRelativeTo(null);
 		frmCargaDeDatos.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		panel = new JPanel();
 		frmCargaDeDatos.getContentPane().add(panel, BorderLayout.SOUTH);
@@ -120,14 +112,13 @@ public class MostrarDatosMenu extends javax.swing.JFrame {
 		lblEuskoflix.setHorizontalAlignment(SwingConstants.CENTER);
 		frmCargaDeDatos.getContentPane().add(lblEuskoflix, BorderLayout.NORTH);
 		
-		cboxVer = new JComboBox();
+		cboxVer = new JComboBox<String>();
 		frmCargaDeDatos.getContentPane().add(cboxVer, BorderLayout.CENTER);
 		cboxVer.addItem("Elige una opción");
 		cboxVer.addItem("Ver peliculas cargadas");
 		cboxVer.addItem("Ver valoraciones cargadas");
 		cboxVer.addItem("Ver usuarios cargados");
 		cboxVer.addItem("¡Recomiendame unas películas!");
-		setLocationRelativeTo(null);
 		frmCargaDeDatos.setVisible(true);
 	}
 

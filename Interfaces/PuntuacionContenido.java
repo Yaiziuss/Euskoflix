@@ -10,10 +10,6 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.ArrayList;
-import java.util.Map.Entry;
-
-import javax.swing.Action;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
@@ -29,13 +25,15 @@ import Euskoflix.Usuario;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JTextField;
-import javax.swing.JTextPane;
 import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 
 public class PuntuacionContenido extends JDialog {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4641661940326940564L;
 	private final JPanel contentPanel = new JPanel();
 	private int op;
 	/**

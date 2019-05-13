@@ -1,34 +1,29 @@
 package Interfaces;
 
 import java.awt.BorderLayout;
-import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.GridLayout;
-
-import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.text.html.HTMLDocument.Iterator;
-
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Set;
 import java.awt.event.ActionEvent;
-import javax.swing.JList;
 import javax.swing.JLabel;
-import javax.swing.JTextArea;
 import Euskoflix.*;
 import java.util.Map.Entry;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
 public class MostrarPeliculas extends JDialog {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6070401505046866545L;
 	private JPanel contentPanel = new JPanel();
-	private JTable table;
+	//private JTable table;
 
 	/**
 	 * Launch the application.
@@ -48,6 +43,7 @@ public class MostrarPeliculas extends JDialog {
 	 */
 	public MostrarPeliculas() {
 		setBounds(100, 100, 1000, 500);
+		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
 		{
 			JPanel panel = new JPanel();
@@ -95,8 +91,8 @@ public class MostrarPeliculas extends JDialog {
                                 add(tabla1);
                                 
                                 //for para separar el id del nombre de la peli
-                                for(Entry<Integer,Pelicula> par: lp){
-                                    modelotabla.addRow(new Object[] {par.getKey(),par.getValue().getNombre()});
+                                for(Entry<Integer,Pelicula> par: lp){ //.substring(0,par[1].length()-1)
+									modelotabla.addRow(new Object[] {par.getKey(),par.getValue().getNombre() });
                                     }
                                 JScrollPane scroll11 = new JScrollPane(tabla1);
                                 JScrollPane scroll12 = new JScrollPane(tabla1);

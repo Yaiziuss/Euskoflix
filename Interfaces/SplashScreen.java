@@ -3,17 +3,17 @@ package Interfaces;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Font;
-import java.awt.HeadlessException;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 
-import Euskoflix.CargadorDatos;
-
 public class SplashScreen extends JWindow {
 
-    static boolean isRegistered;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	static boolean isRegistered;
     private static JProgressBar progressBar = new JProgressBar();
-    private static SplashScreen execute;
     private static int count;
     private static Timer timer1;
 
@@ -35,9 +35,6 @@ public class SplashScreen extends JWindow {
         JLabel lblAutoresYaizaAlfredo = new JLabel("Autores: Yaiza, Alfredo y Aitor");
         lblAutoresYaizaAlfredo.setBounds(86, 115, 278, 16);
         getContentPane().add(lblAutoresYaizaAlfredo);
-
-        
-        setVisible(true);
     }
 
     private void loadProgressBar() {
@@ -54,9 +51,5 @@ public class SplashScreen extends JWindow {
         };
         timer1 = new Timer(50, al);
         timer1.start();
-    }
-
-    public static void main(String[] args) { 
-        execute = new SplashScreen();
     }
 };

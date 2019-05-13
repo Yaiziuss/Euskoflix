@@ -43,7 +43,7 @@ public class CatalogoUsuarios{
     
     public ArrayList<Entry<Integer,ArrayList<Entry<Integer,Double>>>> listaEntriesDeUsuarios(){
         ArrayList<Entry<Integer,ArrayList<Entry<Integer,Double>>>> listaVU= new ArrayList<>();
-        Map<Integer,ArrayList<Entry<Integer,Double>>> aux = new HashMap();
+        Map<Integer,ArrayList<Entry<Integer,Double>>> aux = new HashMap<Integer, ArrayList<Entry<Integer, Double>>>();
         for(int clave : listaUsuarios.keySet()){
             aux.put(clave,listaUsuarios.get(clave).getPeliculaYValoracion());
         }
