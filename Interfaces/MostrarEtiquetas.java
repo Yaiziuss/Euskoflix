@@ -85,7 +85,7 @@ public class MostrarEtiquetas extends JDialog {
 				
 				DefaultTableModel modelotabla;
 				JTable tabla1;
-				ArrayList<Entry<String,Integer>> le = CatalogoEtiquetas.getMiCEti().getParejitasFelices();
+				ArrayList<Entry<String,Integer>> le = CatalogoEtiquetas.getMiCEti().obtenerEtiquetasYApariciones();
 				Object columnas[] = {"Comentario","Nº de apariciones"};
 
 				    modelotabla = new DefaultTableModel(columnas,0); //0 son las filas
