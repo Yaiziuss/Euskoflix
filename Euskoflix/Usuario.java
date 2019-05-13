@@ -33,19 +33,11 @@ public class Usuario{
         this.listaValoraciones.put(pIdPeli,pValoracion);
     }
 
-    /**
-     * Devuelve la valoracion de pClave o 0 si no existe
-     * @param pClave
-     * @return 
-     */
+    
     public double getValoracion(int pClave){
         return (this.listaValoraciones.get(pClave)==null)?0:listaValoraciones.get(pClave); 
     }
     
-    /**
-     * Devuelve una estructura equivalente al HashMap 
-     * @return 
-     */
     public ArrayList<Entry<Integer,Double>> getPeliculaYValoracion(){
         ArrayList<Entry<Integer,Double>> lista = new ArrayList<>();
         for(Entry<Integer,Double> e: listaValoraciones.entrySet()){lista.add(e);}

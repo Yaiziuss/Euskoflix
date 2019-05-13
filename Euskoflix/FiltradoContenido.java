@@ -15,6 +15,7 @@ import java.util.Map.Entry;
  *Este modelo se basa en el contenido para hacer las predicciones
  */
 public class FiltradoContenido extends Filtrado{
+    
     private Map<Integer,Map<String,Double>> modeloPersonas; //integer idUsuario, 
     
     private static FiltradoContenido miFiltro= new FiltradoContenido();
@@ -23,20 +24,12 @@ public class FiltradoContenido extends Filtrado{
         this.modeloPersonas = new HashMap<>();
     }
 
-    /**
-     * Devuelve la unica instancia de FiltradoContenido
-     * @return FiltradoContenido
-     */
+
     public static FiltradoContenido getMiFiltro(){return miFiltro;}
     
-    /**
-     * Genera un modelo de pIdUsuario a partir de pValoracionesUsuario, selecciona las peliculas con puntuacion mayor o igual a 3,5 y multiplica la valoracion por el peso de sus etiquetas
-     * @param pIdUsuario
-     * @param pValoracionesUsuario 
-     */
-    public void annadirModeloPersona(int pIdUsuario, ArrayList<Entry<Integer,Double>> pValoracionesUsuario ){
+    public void annadirModeloPersona(int idUsuario, ArrayList<Entry<Integer,Double>> valoracionesUsuario ){
         Map<String,Double> modeloPersona = new HashMap<>();
-        for(Entry<Integer,Double> parPeliValoracion: pValoracionesUsuario){  
+        for(Entry<Integer,Double> parPeliValoracion: valoracionesUsuario){  
             if(parPeliValoracion.getValue()<3.5)continue;
             //recorre la lista de pesos de etiquetas de cada pelicula y multiplica la valoracion por el peso, si la etiqueta ya existe en el hashmap suma el nuevo valor al original
             for(Entry<String,Double> parEtiquetaPeso: CatalogoPeliculas.getMiCPeli().getPelicula(parPeliValoracion.getKey()).getEtiquetasYPesos()){
@@ -47,19 +40,14 @@ public class FiltradoContenido extends Filtrado{
                 modeloPersona.put(parEtiquetaPeso.getKey(),resultado);
             }
         }
-        modeloPersonas.put(pIdUsuario, modeloPersona);
+        modeloPersonas.put(idUsuario, modeloPersona);
     }
     
-    /**
-     * Devuelve una lista con las 30 peliculas que mas se ajustan a los gustos de pUsuario
-     * @param pUsuario
-     * @return ArrayList<String>
-     */
     @Override
-    public ArrayList<String> seleccionar30MejoresPelisPara(int pUsuario) {
+    public ArrayList<String> seleccionar30MejoresPelisPara(int usuario) {
         ArrayList<String> lista= new ArrayList<>();
         for(int idPelicula: CatalogoPeliculas.getMiCPeli().getListaPeliculas()){
-            lista.add(calcularNota(pUsuario, idPelicula)+"//"+CatalogoPeliculas.getMiCPeli().getPelicula(idPelicula).getNombre());
+            lista.add(calcularNota(usuario, idPelicula)+"//"+CatalogoPeliculas.getMiCPeli().getPelicula(idPelicula).getNombre());
         }
         quickSort(lista,0,lista.size()-1);
         return sublista(lista,lista.size()-30,lista.size());
@@ -70,47 +58,27 @@ public class FiltradoContenido extends Filtrado{
         public double norma(int x);
     }
     
-    /**
-     * Devuelve la nota que le daria pIdsuario a pIdPelicula
-     * @param pIdUsuario
-     * @param pIdPelicula
-     * @return double
-     */
     @Override
-    public double calcularNota(int pIdUsuario, int pIdPelicula) {
-    	return Math.abs(coseno(pIdUsuario,pIdPelicula));
+    public double calcularNota(int idUsuario, int idPelicula) {
+    	return Math.abs(coseno(idUsuario,idPelicula));
     }
     
-    /**
-     * Calcula el coseno de los vectores de de los vectores de pesos de etiquetas de pIdUsuario y pIdPelicula
-     * @param pIdUsuario
-     * @param pIdPelicula
-     * @return double
-     */
     @Override
-    public double coseno(int pIdUsuario, int pIdPelicula){
+    public double coseno(int idUsuario, int idPelicula){
         Operacion o= (int id)->{
             double modulo=0;
             modulo = modeloPersonas.get(id).entrySet().stream().map((par) -> Math.pow(par.getValue(),2)).reduce(modulo, (accumulator, _item) -> accumulator + _item);
             return Math.sqrt(modulo);
         };
-        return productoEscalar(pIdPelicula, pIdUsuario)/(o.norma(pIdUsuario)*CatalogoPeliculas.getMiCPeli().norma(pIdPelicula));
+        return productoEscalar(idPelicula, idUsuario)/(o.norma(idUsuario)*CatalogoPeliculas.getMiCPeli().norma(idPelicula));
     }
-    
-    /**
-     * Calcula el producto escalar de los vectores de pesos de etiquetas de pIdUsuario y pIdPelicula
-     * @param pIdPelicula
-     * @param pIdUsuario
-     * @return double
-     */
+
     @Override
-    public double productoEscalar(int pIdPelicula, int pIdUsuario){
+    public double productoEscalar(int idPelicula, int idUsuario){
         double dot=0;
-        for(Entry<String,Double> par: CatalogoPeliculas.getMiCPeli().getPelicula(pIdPelicula).getEtiquetasYPesos()){
-            dot+=(modeloPersonas.get(pIdUsuario).get(par.getKey())!=null)?par.getValue()*modeloPersonas.get(pIdUsuario).get(par.getKey()):0;
+        for(Entry<String,Double> par: CatalogoPeliculas.getMiCPeli().getPelicula(idPelicula).getEtiquetasYPesos()){
+            dot+=(modeloPersonas.get(idUsuario).get(par.getKey())!=null)?par.getValue()*modeloPersonas.get(idUsuario).get(par.getKey()):0;
         }
         return dot;
-        
-        
     }
 }

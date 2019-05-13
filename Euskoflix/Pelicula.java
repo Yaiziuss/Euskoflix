@@ -31,11 +31,6 @@ public class Pelicula{
 
     public String getNombre() {return nombre;}
     
-    /**
-     * Suma a pEtiqueta pNApariciones y si pEtiqueta no existe lo crea en pesoEtiquetas y annade pEtiqueta
-     * @param pEtiqueta 
-     * @param pNApariciones 
-     */
     public void annadirEtiqueta(String pEtiqueta, double pNApariciones){
         if(!this.pesoEtiquetas.containsKey(pEtiqueta)){ 
             this.pesoEtiquetas.put(pEtiqueta,pNApariciones);
@@ -44,38 +39,18 @@ public class Pelicula{
         }
     }
     
-    /**
-     * Devuelve el peso de pEtiqueta y 0 si pEtiqueta no existe
-     * @param pEtiqueta
-     * @return 
-     */
     public double getPesoEtiqueta(String pEtiqueta){ return (this.pesoEtiquetas.get(pEtiqueta)==null)?0:pesoEtiquetas.get(pEtiqueta);}
-    
-    /**
-     * Devuelve una lista con los nombres de las etiquetas
-     * @return 
-     */
+
     public Set<String> getNombresEtiquetas() { return pesoEtiquetas.keySet(); }
     
-    /**
-     * Devuelve una estructura equivalente al HashMap pero en forma de arrayList
-     * @return 
-     */
     public ArrayList<Entry<String,Double>> getEtiquetasYPesos(){
         ArrayList<Entry<String,Double>> lista = new ArrayList<>();
         for(Entry<String,Double> e: pesoEtiquetas.entrySet()){lista.add(e);}
         return lista;
     }
-    /**
-     * Annade a valoradaPorUsuarios el id pIdUsuario
-     * @param pIdUsuario 
-     */
-    public void annadirUsuario(int pIdUsuario) {this.valoradaPorUsuarios.add(pIdUsuario);}
     
-    /**
-     * Devuelve un String que contiene todos los ids de usuarios de valoradaPorUsuarios concatenados y separados por /
-     * @return 
-     */
+    public void annadirUsuario(int idUsuario) {this.valoradaPorUsuarios.add(idUsuario);}
+    
     public String getListaUsuarios(){
     	String usuarios="";
     	for(Integer id: valoradaPorUsuarios) {
