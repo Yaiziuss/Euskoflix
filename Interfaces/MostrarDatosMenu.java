@@ -115,7 +115,7 @@ public class MostrarDatosMenu extends javax.swing.JFrame {
 		cboxVer = new JComboBox<String>();
 		frmCargaDeDatos.getContentPane().add(cboxVer, BorderLayout.CENTER);
 		cboxVer.addItem("Elige una opción");
-		cboxVer.addItem("Ver peliculas cargadas");
+		cboxVer.addItem("Ver películas cargadas");
 		cboxVer.addItem("Ver valoraciones cargadas");
 		cboxVer.addItem("Ver usuarios cargados");
 		cboxVer.addItem("¡Recomiendame unas películas!");
