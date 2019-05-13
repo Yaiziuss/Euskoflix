@@ -84,6 +84,7 @@ public class RecomendarPeliU extends JDialog {
 				}
 				{
 					JLabel lblTusPelculas = new JLabel("Tus 30 Películas aparecerán aquí abajo");
+					lblTusPelculas.setForeground(Color.red);
 					panel.add(lblTusPelculas);
 				}
 				panel.add(getTabbedPane());
@@ -107,22 +108,20 @@ public class RecomendarPeliU extends JDialog {
 		//getContentPane().add(scrollPane);
 		{
 			ArrayList<String> recom= new ArrayList<>();
-		
 			int usu=Integer.parseInt(txtrIdusuario.getText());
-			recom= FiltradoPersona.getMiFPer().seleccionar30MejoresPelisPara(usu);
 			Usuario cu= CatalogoUsuarios.getMiCU().getUsuario(usu);
 			if (cu==null) {
 				JOptionPane.showMessageDialog(null,"El usuario no existe");
 			} else {
-			table.setRowSelectionAllowed(false);
-			table.setColumnSelectionAllowed(false);
-			table.setCellSelectionEnabled(false);
-			scrollPane.setViewportView(table);
-			DefaultTableModel modelotabla;
-			JTable tabla1;			
-			Object columnas[] = {"Puntuación pelicula","Titulo Pelicula"};
-			modelotabla = new DefaultTableModel(columnas,0); //0 son las filas
-
+				recom= FiltradoPersona.getMiFPer().seleccionar30MejoresPelisPara(usu);
+				table.setRowSelectionAllowed(false);
+				table.setColumnSelectionAllowed(false);
+				table.setCellSelectionEnabled(false);
+				scrollPane.setViewportView(table);
+				DefaultTableModel modelotabla;
+				JTable tabla1;			
+				Object columnas[] = {"Puntuación pelicula","Titulo Pelicula"};
+				modelotabla = new DefaultTableModel(columnas,0); //0 son las filas
 			    tabla1=new JTable(modelotabla);
 			    tabla1.setEnabled(false);
 			    getContentPane().add(tabla1);

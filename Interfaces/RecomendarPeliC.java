@@ -37,7 +37,7 @@ public class RecomendarPeliC extends JDialog {
 	//private JTabbedPane tabbedPane;
 	private JTable table;
 	private JTextField txtrIdusuario;
-	private JTable table1;
+//	private JTable table1;
 
 	/**
 	 * Launch the application.
@@ -56,72 +56,79 @@ public class RecomendarPeliC extends JDialog {
 	 * Create the dialog.
 	 */
 	public RecomendarPeliC() {
-		setBounds(100, 100, 450, 300);
-		getContentPane().setLayout(new GridLayout(0, 1, 0, 0));
-		setLocationRelativeTo(null);
-		
-		JPanel panel = new JPanel();
-		getContentPane().add(panel);
-		JLabel lblEuskoflix = new JLabel("EUSKOFLIX");
-		panel.add(lblEuskoflix);
-		lblEuskoflix.setHorizontalAlignment(SwingConstants.CENTER);
-		lblEuskoflix.setForeground(Color.RED);
-		lblEuskoflix.setFont(new Font("Lucida Grande", Font.BOLD, 30));
-		panel.add(getTxtPorFavorIntroduzca());
-		txtrIdusuario = new JTextField();
-		panel.add(txtrIdusuario);
-		txtrIdusuario.setColumns(10);
-		JButton recomendarButton = new JButton("Recomendar");
-		panel.add(recomendarButton);
-		recomendarButton.setActionCommand("Recomendar");
-		getRootPane().setDefaultButton(recomendarButton);
-		
-		JButton btnVolver = new JButton("Volver");
-		btnVolver.setVisible(false);
-		btnVolver.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				setVisible(false);
+			setBounds(100, 100, 450, 300);
+			setLocationRelativeTo(null);
+			getContentPane().setLayout(new GridLayout(0, 1, 0, 0));
+			{
+				JPanel panel = new JPanel();
+				getContentPane().add(panel);
+				JLabel lblEuskoflix = new JLabel("EUSKOFLIX");
+				panel.add(lblEuskoflix);
+				lblEuskoflix.setHorizontalAlignment(SwingConstants.CENTER);
+				lblEuskoflix.setForeground(Color.RED);
+				lblEuskoflix.setFont(new Font("Lucida Grande", Font.BOLD, 30));
+				panel.add(getTxtPorFavorIntroduzca());
+				{
+					txtrIdusuario = new JTextField();
+					panel.add(txtrIdusuario);
+					txtrIdusuario.setColumns(10);
+				}
+				{
+					JButton recomendarButton = new JButton("Recomendar");
+					panel.add(recomendarButton);
+					recomendarButton.setActionCommand("Recomendar");
+					getRootPane().setDefaultButton(recomendarButton);
+					{
+						JButton btnVolver = new JButton("Volver");
+						//btnVolver.setVisible(false);
+						btnVolver.addActionListener(new ActionListener() {
+							public void actionPerformed(ActionEvent e) {
+								setVisible(false);
+							}
+						});
+						panel.add(btnVolver);
+					}
+					{
+						JLabel lblTusPelculas = new JLabel("Tus 30 Películas aparecerán aquí abajo");
+						lblTusPelculas.setForeground(Color.red);
+						panel.add(lblTusPelculas);
+					}
+					panel.add(getTabbedPane());
+					recomendarButton.addActionListener(new ActionListener(){ 
+						@Override
+						public void actionPerformed(ActionEvent e) {
+							table=getTabbedPane();
+							recomendarButton.setVisible(false);
+							rellenarTabla(table);
+						}
+					});
+				}
 			}
-		});
-		panel.add(btnVolver);
-		
-		JLabel tituloTabla_1 = new JLabel("Tus 30 películas recomendadas aparecerán aquí abajo");
-		panel.add(tituloTabla_1);
-		tituloTabla_1.setHorizontalAlignment(SwingConstants.CENTER);
-		
-		table1 = new JTable();
-		panel.add(table1);
-		recomendarButton.addActionListener(new ActionListener(){ 
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				table= new JTable();
-				recomendarButton.setVisible(false);
-				btnVolver.setVisible(true);
-				rellenarTabla(table);
+			{
+				{
+				}
 			}
-		});
-	}
+		}
 	private void rellenarTabla(JTable table) {
 		JScrollPane scrollPane = new JScrollPane();
 		//contentPanel.add(scrollPane);
 		{
 			ArrayList<String> recom= new ArrayList<>();
-		
 			int usu=Integer.parseInt(txtrIdusuario.getText());
-			recom= FiltradoContenido.getMiFiltro().seleccionar30MejoresPelisPara(usu);
 			Usuario cu= CatalogoUsuarios.getMiCU().getUsuario(usu);
+			System.out.println(cu);
 			if (cu==null) {
 				JOptionPane.showMessageDialog(null,"El usuario no existe");
 			} else {
-			table.setRowSelectionAllowed(false);
-			table.setColumnSelectionAllowed(false);
-			table.setCellSelectionEnabled(false);
-			scrollPane.setViewportView(table);
-			DefaultTableModel modelotabla;
-			JTable tabla1;			
-			Object columnas[] = {"Puntuación pelicula","Titulo Pelicula"};
-			modelotabla = new DefaultTableModel(columnas,0); //0 son las filas
-
+				recom= FiltradoContenido.getMiFiltro().seleccionar30MejoresPelisPara(usu);
+				table.setRowSelectionAllowed(false);
+				table.setColumnSelectionAllowed(false);
+				table.setCellSelectionEnabled(false);
+				scrollPane.setViewportView(table);
+				DefaultTableModel modelotabla;
+				JTable tabla1;			
+				Object columnas[] = {"Puntuación pelicula","Titulo Pelicula"};
+				modelotabla = new DefaultTableModel(columnas,0); //0 son las filas
 			    tabla1=new JTable(modelotabla);
 			    tabla1.setEnabled(false);
 			    getContentPane().add(tabla1);
@@ -151,10 +158,10 @@ public class RecomendarPeliC extends JDialog {
 		}
 		return txtPorFavorIntroduzca;
 	}
-	/*private JTable getTabbedPane() {
+	private JTable getTabbedPane() {
 		if (table == null) {
 			table = new JTable();
 		}
 		return table;
-	}*/
+	}
 }
