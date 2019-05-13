@@ -17,9 +17,6 @@ import java.util.Map.Entry;
  * @author Elalfred
  */
 public class CargadorDatos {
-	/*
-URL url = ModeloValoracion.class.getClassLoader().getResource("./packArchivos/movie-ratings.csv");
-br = new BufferedReader(new FileReader(url.getPath()));*/
 
     private static final String RUTA_F_ETIQUETAS="src//Datos//movie-tags.csv";
     private static final String RUTA_F_PELICULAS="src//Datos//movie-titles.csv";
@@ -35,9 +32,9 @@ br = new BufferedReader(new FileReader(url.getPath()));*/
     }
     
     /**
-     * Recorre el fichero con ruta pRutaFichero 
+     * Recorre el fichero con ruta pRutaFichero y añade todas las lineas a un arrayList
      * @param pRutaFichero
-     * @return lista con todas las lineas del fichero
+     * @return ArrayList<String> 
      */
     private static ArrayList<String> getLineasFichero(String pRutaFichero){
         BufferedReader br = null;
@@ -63,9 +60,10 @@ br = new BufferedReader(new FileReader(url.getPath()));*/
         }
         return listaLineas;
     } 
-    
+
     /**
      * Añade al catalogo de peliculas todas las peliculas junto con sus ids
+     * a partir del fichero de peliculas
      */
     private static void cargarFicheroPeliculas() {
         CatalogoPeliculas catPeliculas = CatalogoPeliculas.getMiCPeli();
@@ -79,6 +77,8 @@ br = new BufferedReader(new FileReader(url.getPath()));*/
     /**
      * Añade al catalogo de etiquetas todas las que se encuentren en el fichero y el numero de apariciones total de la etiqueta
      * y añade a cada pelicula del catalogo las etiquetas que aparecen en ella junto con el numero de apariciones de la etiqueta en la peli
+     * una vez terminado el proceso de carga calcula el TF-IDF  de cada etiqueta en el catalogo
+     * y por ultimo normaliza los valores de cada una de las etiquetas que tiene cada pelicula
      */
     private static void cargarFicheroEtiquetas(){
         CatalogoPeliculas catPeliculas = CatalogoPeliculas.getMiCPeli();
@@ -88,15 +88,14 @@ br = new BufferedReader(new FileReader(url.getPath()));*/
         listaEtiquetas.remove(0);
         int apariciones=1;
         for(String nextL :listaEtiquetas){
-            if(lAct.equals(nextL)){
-                apariciones++;
-                continue;
+            if(lAct.equals(nextL))apariciones++;
+            else{
+                String [] fields = lAct.split(SEPARADOR1);
+                catPeliculas.annadirEtiqueta(Integer.parseInt(fields[0]), apariciones, fields[1]);
+                catEtiquetas.annadirPeliAEtiqueta(fields[1]);
+                lAct=nextL;
+                apariciones=1;  
             }
-            String [] fields = lAct.split(SEPARADOR1);
-            catPeliculas.annadirEtiqueta(Integer.parseInt(fields[0]), apariciones, fields[1]);
-            catEtiquetas.annadirPeliAEtiqueta(fields[1]);
-            lAct=nextL;
-            apariciones=1;   
         }
         String [] fields = lAct.split(SEPARADOR1);
         catPeliculas.annadirEtiqueta(Integer.parseInt(fields[0]), apariciones, fields[1]);
@@ -135,6 +134,9 @@ br = new BufferedReader(new FileReader(url.getPath()));*/
         }
     }
     
+    /**
+     * Por cada peli calcula su norma y divide cada uno de los pesos de sus etiquetas por ella
+     */
     private static void normalizarPesos() {
     	CatalogoPeliculas catPeliculas = CatalogoPeliculas.getMiCPeli();
     	for(Entry<Integer,Pelicula> peli: catPeliculas.getIdsYPeliculas()) {
@@ -145,7 +147,9 @@ br = new BufferedReader(new FileReader(url.getPath()));*/
     	}
     }
     
- 
+    /**
+     * Añade cada usuario del catalogo a la estructura de la clase Filtrado Contenido
+     */
     private static void cargarFiltroContenido(){
         CatalogoUsuarios.getMiCU().listaEntriesDeUsuarios().stream().forEach((listaEntriesUsuario) -> {
             FiltradoContenido.getMiFiltro().annadirModeloPersona(listaEntriesUsuario.getKey(), listaEntriesUsuario.getValue());

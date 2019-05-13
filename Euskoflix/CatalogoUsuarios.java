@@ -23,12 +23,21 @@ public class CatalogoUsuarios{
     private CatalogoUsuarios(){
         this.listaUsuarios= new HashMap<>();
     }
-    
+    /**
+     * Devuelve la unica instancia del catalogo
+     * @return CatalogoUsuarios
+     */
     public static CatalogoUsuarios getMiCU(){  return miCU;  }
     
-    public Usuario getUsuario(int pIDUsu){return listaUsuarios.get(pIDUsu);}
     /**
-     * Añade la valoracion de pIdPeli a la lista de valoraciones de pIdUsuario y añade pIdUsuario si no existe
+     * Devuelve el usuario pIDUsu
+     * @param pIDUsu
+     * @return Usuario
+     */
+    public Usuario getUsuario(int pIDUsu){return listaUsuarios.get(pIDUsu);}
+    
+    /**
+     * Aniade la valoracion de pIdPeli a la lista de valoraciones de pIdUsuario y añade pIdUsuario si no existe
      * @param pIdUsuario
      * @param pIdPeli
      * @param pValoracion 
@@ -40,10 +49,13 @@ public class CatalogoUsuarios{
         this.listaUsuarios.get(pIdUsuario).annadirValoracion(pIdPeli, pValoracion);
     }
    
-    
+    /**
+     * Devuelve una estructura equivalente al HashMap listaUsuario, pero en forma de ArrayList para facilitar su iteracion
+     * @return ArrayList<Entry<Integer,ArrayList<Entry<Integer,Double>>>>
+     */
     public ArrayList<Entry<Integer,ArrayList<Entry<Integer,Double>>>> listaEntriesDeUsuarios(){
         ArrayList<Entry<Integer,ArrayList<Entry<Integer,Double>>>> listaVU= new ArrayList<>();
-        Map<Integer,ArrayList<Entry<Integer,Double>>> aux = new HashMap<Integer, ArrayList<Entry<Integer, Double>>>();
+        Map<Integer,ArrayList<Entry<Integer,Double>>> aux = new HashMap();
         for(int clave : listaUsuarios.keySet()){
             aux.put(clave,listaUsuarios.get(clave).getPeliculaYValoracion());
         }
