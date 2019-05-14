@@ -118,7 +118,6 @@ public class RecomendarPeliU extends JDialog {
 					public void actionPerformed(ActionEvent e) {
 						tabla1=getTabbedPane();
 						recomendarButton.setVisible(false);
-						btnVolver.setVisible(true);
 						rellenarTabla(tabla1);
 					}
 				});
