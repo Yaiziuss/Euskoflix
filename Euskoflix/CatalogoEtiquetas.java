@@ -36,7 +36,7 @@ public class CatalogoEtiquetas {
     }
     public Set<String> getListaEtiquetas() {return listaApariciones.keySet(); }
     
-    public ArrayList<Entry<String,Integer>> getParejitasFelices(){
+    public ArrayList<Entry<String,Integer>> obtenerEtiquetasYApariciones(){
     	ArrayList<Entry<String,Integer>> listaE= new ArrayList<>();
     	for(Entry<String,Integer> par: listaApariciones.entrySet()) { 
             listaE.add(par);}
